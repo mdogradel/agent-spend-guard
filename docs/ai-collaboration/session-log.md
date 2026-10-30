@@ -594,3 +594,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/app/rules/page.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** Sample rules are not in the spec. They make the demo usable without hand-entering five rules. Duplicates are rejected if you click the button twice. 69 tests pass, build is clean.
+
+---
+
+## Task 12.4 — Simulator page
+
+**Timestamp:** 2026-10-30T18:23:08Z
+
+**My prompt:** Add the simulator page and show the decision after a purchase is submitted.
+
+**What the AI did:** Added `src/app/simulator/page.tsx`. It renders `SimulatorForm`, which fills from a preset and shows the outcome, explanation, and a receipt link.
+
+**Files touched:** `src/app/simulator/page.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** None. 69 tests pass, build is clean. The page copy calls out the Hotel Lisbon date mismatch so the demo path is obvious.

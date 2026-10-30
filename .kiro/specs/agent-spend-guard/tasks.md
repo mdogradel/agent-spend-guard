@@ -274,7 +274,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Show pending-purchase warning when editing a rule that affects pending receipts (counts affected pending purchases; blocks save until user acknowledges)
     - _Requirements: 1.1–1.9_
 
-  - [ ] 12.4 Create `src/app/simulator/page.tsx` — Agent Simulator page
+  - [x] 12.4 Create `src/app/simulator/page.tsx` — Agent Simulator page
     - Render `<SimulatorForm>` with preset selector
     - Show decision result (outcome badge + explanation) after submission
     - _Requirements: 2.1–2.6_
