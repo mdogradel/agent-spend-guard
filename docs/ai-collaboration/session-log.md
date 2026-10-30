@@ -650,3 +650,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/app/receipts/page.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** None. 69 tests pass, build is clean.
+
+---
+
+## Task 12.8 — Receipt detail and dispute
+
+**Timestamp:** 2026-10-30T18:24:52Z
+
+**My prompt:** Show one receipt and the dispute panel only when it has a mismatch.
+
+**What the AI did:** Added `src/app/receipts/[id]/page.tsx`. It renders `IntentReceiptDetail`. `DisputeSummaryPanel` is rendered only when `shouldShowDisputeButton` is true.
+
+**Files touched:** `src/app/receipts/[id]/page.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** None. 69 tests pass, build is clean. The dynamic route prerenders as a partial page, which is what Next.js 16 does for a client page that reads the id.

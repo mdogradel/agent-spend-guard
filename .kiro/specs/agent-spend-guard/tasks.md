@@ -256,7 +256,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Fallback: if clipboard API unavailable, shows the summary text in a `<textarea>` for manual copy
     - _Requirements: 8.2, 8.3, 8.4, 8.5_
 
-- [ ] 12. Implement application routes and pages
+- [x] 12. Implement application routes and pages
   - [x] 12.1 Create `src/app/layout.tsx` and wire monthly reset + storage guard
     - Root layout renders `<NavBar>` and `{children}`
     - Include `<StorageWarningBanner>` in layout
@@ -300,7 +300,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Each row links to `/receipts/[id]`
     - _Requirements: 7.1, 7.7_
 
-  - [ ] 12.8 Create `src/app/receipts/[id]/page.tsx` — Receipt detail + Dispute page
+  - [x] 12.8 Create `src/app/receipts/[id]/page.tsx` — Receipt detail + Dispute page
     - Render `<IntentReceiptDetail>` for the receipt matching the URL param
     - Render `<DisputeSummaryPanel>` only when `receipt.mismatches.length > 0`
     - _Requirements: 7.2, 8.1, 8.2, 8.6_
