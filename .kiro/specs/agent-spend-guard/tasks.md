@@ -231,7 +231,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Presents Decline and Override Once buttons
     - _Requirements: 5.3, 5.5_
 
-  - [ ] 11.7 Create `src/components/RuleForm.tsx`
+  - [x] 11.7 Create `src/components/RuleForm.tsx`
     - Shared form for create and edit; accepts rule type selector and fields appropriate to each type
     - Inline validation: empty name, amount out of range (0.01–999,999,999.99), duplicate name
     - Calls `addRule` or `updateRule` on submit

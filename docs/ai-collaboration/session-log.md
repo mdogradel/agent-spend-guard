@@ -496,3 +496,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/components/OverageWarningModal.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** None. 69 tests pass, build is clean.
+
+---
+
+## Task 11.7 — Rule form
+
+**Timestamp:** 2026-10-30T18:19:26Z
+
+**My prompt:** Add the shared create and edit form for spending rules, with validation.
+
+**What the AI did:** Added `src/components/RuleForm.tsx`. The type selector switches the fields. Amounts outside 0.01 to 999,999,999.99 and duplicate names are rejected inline. Editing a rule that matches pending purchases shows how many are affected and blocks save until that warning is acknowledged.
+
+**Files touched:** `src/components/RuleForm.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** The pending-purchase warning lives on the form so both create-page and inline edit use the same gate. The task text also mentions it on the rules page. The page will render this form, so the warning is not implemented twice. 69 tests pass, build is clean.
