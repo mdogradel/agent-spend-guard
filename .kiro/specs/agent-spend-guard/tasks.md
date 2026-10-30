@@ -114,7 +114,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Category check: skip if `intendedCategory` absent; flag if `purchase.category` does not match after case-insensitive trim
     - _Requirements: 7.3, 7.4, 7.5, 7.6_
 
-  - [ ]* 6.2 Write unit tests for mismatch checker
+  - [x]* 6.2 Write unit tests for mismatch checker
     - Price within 5% grace in USD (no flag)
     - Price exactly at 5% boundary in USD (no flag)
     - Price exceeding 5% in USD (flag)

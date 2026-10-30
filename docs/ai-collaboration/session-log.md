@@ -300,3 +300,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/lib/mismatch-checker.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** Requirements 7.4 and properties 9-10 compare in the budget currency. Design fix 3 compares both sides in USD and skips when a rate is missing. Those are the same math when a rate exists (dividing the USD amount by the budget currency's USD rate). I kept the direct same-currency path so a EUR intent against a EUR charge does not depend on a rate being cached. Build is clean. The new file has no tests yet; those are task 6.2.
+
+---
+
+## Task 6.2 — Unit tests for the mismatch checker
+
+**Timestamp:** 2026-10-30T18:10:46Z
+
+**My prompt:** Write the task 6.2 mismatch checker unit tests, including the skip-when-no-rate cases.
+
+**What the AI did:** Added `src/lib/__tests__/mismatch-checker.test.ts`. Covered the 5% USD grace (inside, exact boundary, over), same-currency direct compare, cross-currency conversion into the budget currency, missing budget rate, null USD equivalent, exact dates, off-by-one date, category match and mismatch, no-intent empty list, and each structured field being absent.
+
+**Files touched:** `src/lib/__tests__/mismatch-checker.test.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** Also covered the requirement 7.8 case where the currencies differ and the converted amount is over the grace. The task list had swapped that case for the USD and skip cases, and both belong. 59 tests pass, build is clean.
