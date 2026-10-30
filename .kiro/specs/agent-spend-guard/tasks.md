@@ -140,7 +140,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - **Validates: Requirements 7.4**
     - _Minimum 100 iterations per property_
 
-- [ ] 7. Implement dispute summary generator
+- [x] 7. Implement dispute summary generator
   - [x] 7.1 Create `src/lib/dispute-generator.ts` with `generateDisputeSummary` pure function
     - Produce the plain-text dispute document in the exact section structure defined in the design (`ORIGINAL INTENT`, `ACTUAL PURCHASE`, `MISMATCHES`, `RULES ENGINE DECISION`, `EXCHANGE RATE`)
     - Output contains no HTML tags or markup
@@ -148,7 +148,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Conditionally include override log and FX rate sections only when present
     - _Requirements: 8.2, 8.3_
 
-  - [ ]* 7.2 Write property-based tests for dispute generator (fast-check)
+  - [x]* 7.2 Write property-based tests for dispute generator (fast-check)
     - **Property 11: Dispute summary contains all required fields** — any receipt with ≥ 1 mismatch → output contains intent text (or no-intent marker), each mismatch type and detail, decision outcome, explanation, UTC timestamp, and no HTML tags
     - **Validates: Requirements 8.2, 8.3**
 

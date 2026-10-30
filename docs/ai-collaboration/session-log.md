@@ -342,3 +342,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/lib/dispute-generator.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** The button helper is a one-liner, but the page and property 12 should share it instead of each checking `mismatches.length` on their own. Build is clean. Property coverage is task 7.2.
+
+---
+
+## Task 7.2 — Property test for the dispute generator
+
+**Timestamp:** 2026-10-30T18:12:15Z
+
+**My prompt:** Write property 11 for the dispute summary.
+
+**What the AI did:** Added `src/lib/__tests__/dispute-generator.property.test.ts`. For receipts with one or more mismatches, the summary contains the intent text or the no-intent marker, every mismatch type and detail, the decision outcome, the explanation, and a UTC timestamp. It also asserts there are no HTML tags.
+
+**Files touched:** `src/lib/__tests__/dispute-generator.property.test.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** None. 63 tests pass, build is clean.
