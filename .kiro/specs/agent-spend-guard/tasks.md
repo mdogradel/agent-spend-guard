@@ -267,7 +267,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
   - [x] 12.2 Create `src/app/page.tsx` (root redirect to `/dashboard`)
     - _Requirements: 9.1_
 
-  - [ ] 12.3 Create `src/app/rules/page.tsx` — Rules Configuration page
+  - [x] 12.3 Create `src/app/rules/page.tsx` — Rules Configuration page
     - List all active Category_Limits, Merchant_Limits, Approval_Threshold, and Blocked_Categories
     - Add/edit via `<RuleForm>` inline or modal
     - Delete button per rule

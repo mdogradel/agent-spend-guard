@@ -580,3 +580,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/app/page.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** None. 69 tests pass, build is clean. `/dashboard` does not exist yet, so the redirect target is task 12.5.
+
+---
+
+## Task 12.3 — Rules page
+
+**Timestamp:** 2026-10-30T18:22:47Z
+
+**My prompt:** Build the rules page: list, add, edit, delete, and warn when a change touches pending purchases.
+
+**What the AI did:** Added `src/app/rules/page.tsx`. It lists every rule, opens `RuleForm` to add or edit, and deletes from the store. The form already blocks a save until the user acknowledges affected pending purchases. A "Load sample rules" button adds Dining, Travel, Groceries, a $50 threshold, and a blocked Gambling category.
+
+**Files touched:** `src/app/rules/page.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** Sample rules are not in the spec. They make the demo usable without hand-entering five rules. Duplicates are rejected if you click the button twice. 69 tests pass, build is clean.
