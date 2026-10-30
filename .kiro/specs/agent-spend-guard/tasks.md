@@ -257,7 +257,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - _Requirements: 8.2, 8.3, 8.4, 8.5_
 
 - [ ] 12. Implement application routes and pages
-  - [ ] 12.1 Create `src/app/layout.tsx` and wire monthly reset + storage guard
+  - [x] 12.1 Create `src/app/layout.tsx` and wire monthly reset + storage guard
     - Root layout renders `<NavBar>` and `{children}`
     - Include `<StorageWarningBanner>` in layout
     - `useEffect` on mount calls `store.runMonthlyResetIfNeeded()`

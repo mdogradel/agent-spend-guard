@@ -552,3 +552,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/components/DisputeSummaryPanel.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** None. 69 tests pass, build is clean. The receipt page will render this only when the receipt has mismatches.
+
+---
+
+## Task 12.1 — App shell and monthly reset
+
+**Timestamp:** 2026-10-30T18:21:50Z
+
+**My prompt:** Wire the root layout with navigation, the storage banner, and a monthly reset on load.
+
+**What the AI did:** Added `src/components/AppShell.tsx` and rendered it from `src/app/layout.tsx`. On mount it hydrates from localStorage, then runs the monthly reset, and only then renders the pages. The banner and nav sit above the page.
+
+**Files touched:** `src/components/AppShell.tsx`, `src/app/layout.tsx`, `src/app/globals.css`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** The task says to put `"use client"` on the root layout. Next.js 16 uses that file for `metadata` and `next/font`, which have to stay on the server. The client behavior lives in `AppShell` instead. I also locked the page to a light background so the screens do not flip with the OS theme. 69 tests pass, build is clean.
