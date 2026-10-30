@@ -175,3 +175,25 @@ Four targeted fixes applied after the initial design draft.
 **Build result:** `npm run build` passes cleanly — 4 static pages generated.
 
 **Anything changed or rejected:** None. Followed the task spec exactly.
+
+---
+
+## Task 2 — Define all TypeScript interfaces and shared types
+
+**What the user asked:** Go ahead with task 2.
+
+**What was done:**
+- Created `src/types/index.ts` with all domain interfaces from the design, organised into labelled sections:
+  - **Rules:** `CategoryLimit`, `MerchantLimit`, `ApprovalThreshold`, `BlockedCategory`, `SpendingRule` union, `RuleSet`
+  - **Purchase Request:** `StructuredIntent`, `PurchaseRequest` (including `travelDates?: string[]` from Design Fix 1)
+  - **FX Rate Cache:** `FxRateCacheEntry`, `FxRateCache`
+  - **Rules Engine Decision:** `DecisionOutcome`, `RuleFailure`, `EngineDecision`
+  - **Rules Engine Input:** `CommittedSpend`, `EngineInput`
+  - **Intent Receipt & Mismatch:** `MismatchFlagType`, `MismatchFlag`, `PurchaseStatus`, `OverrideLog`, `IntentReceipt` (including `priceCheckSkipped` and `priceCheckSkipReason` from Design Fix 3)
+  - **Monthly Reset:** `MonthlyResetState`
+- Added inline comments referencing key design decisions (threshold strictly-greater-than, stale flag, no-intent marker, etc.)
+- Fixed a second stale `.bin/tsc` shim left from the `cp -r` scaffold step by reinstalling TypeScript.
+
+**Verification:** `npx tsc --noEmit` and `npm run build` both pass with zero errors.
+
+**Anything changed or rejected:** None.
