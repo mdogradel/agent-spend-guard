@@ -314,3 +314,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/lib/__tests__/mismatch-checker.test.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** Also covered the requirement 7.8 case where the currencies differ and the converted amount is over the grace. The task list had swapped that case for the USD and skip cases, and both belong. 59 tests pass, build is clean.
+
+---
+
+## Task 6.3 — Property tests for the mismatch checker
+
+**Timestamp:** 2026-10-30T18:11:21Z
+
+**My prompt:** Write fast-check properties 8, 9, and 10 for the mismatch checker.
+
+**What the AI did:** Added `src/lib/__tests__/mismatch-checker.property.test.ts`. Property 8 checks blank intent. Property 9 checks the 5% boundary in the shared currency. Property 10 only keeps runs where a raw compare and an FX compare disagree, and asserts the flag follows the converted amount.
+
+**Files touched:** `src/lib/__tests__/mismatch-checker.property.test.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** None. 62 tests pass, build is clean.
