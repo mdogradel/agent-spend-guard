@@ -538,3 +538,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/components/IntentReceiptDetail.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** None. 69 tests pass, build is clean.
+
+---
+
+## Task 11.10 — Dispute summary panel
+
+**Timestamp:** 2026-10-30T18:21:01Z
+
+**My prompt:** Add the dispute panel with copy-to-clipboard and a textarea fallback.
+
+**What the AI did:** Added `src/components/DisputeSummaryPanel.tsx`. The Dispute button builds the plain-text summary and calls `navigator.clipboard.writeText`. If the clipboard API is missing or the write fails, the same text is shown in a read-only textarea.
+
+**Files touched:** `src/components/DisputeSummaryPanel.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** None. 69 tests pass, build is clean. The receipt page will render this only when the receipt has mismatches.

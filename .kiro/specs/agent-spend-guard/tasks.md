@@ -195,7 +195,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Each preset exports a full `PurchaseRequest`-shaped object with all fields including `intentText` and `structuredIntent`
     - _Requirements: 2.1, 2.2_
 
-- [ ] 11. Implement shared UI components
+- [x] 11. Implement shared UI components
   - [x] 11.1 Create `src/components/NavBar.tsx` with `PendingBadge`
     - Full-width top navigation with links to `/dashboard`, `/inbox`, `/rules`, `/simulator`, `/receipts`
     - `PendingBadge` reads `pendingCount()` from store; renders a numeric badge on the Inbox link; updates immediately after approve/decline
@@ -250,7 +250,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Conditionally renders mismatch indicator section
     - _Requirements: 7.2, 7.7, 3.3, 3.6_
 
-  - [ ] 11.10 Create `src/components/DisputeSummaryPanel.tsx`
+  - [x] 11.10 Create `src/components/DisputeSummaryPanel.tsx`
     - Calls `generateDisputeSummary(receipt)` and renders the result
     - Copy to clipboard button that calls `navigator.clipboard.writeText`
     - Fallback: if clipboard API unavailable, shows the summary text in a `<textarea>` for manual copy
