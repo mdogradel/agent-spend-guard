@@ -186,8 +186,8 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - **Validates: Requirements 10.6**
     - _Minimum 100 iterations per property_
 
-- [ ] 10. Implement simulator presets
-  - [ ] 10.1 Create `src/lib/simulator-presets.ts` with all four preset definitions
+- [x] 10. Implement simulator presets
+  - [x] 10.1 Create `src/lib/simulator-presets.ts` with all four preset definitions
     - **Coffee Shop**: category Dining, 8.50 USD, no travel dates, simple intentText and StructuredIntent
     - **Hotel Lisbon**: category Travel, 480.00 EUR, purchase `travelDates: ["2024-11-12", "2024-11-15"]`, intent `travelDates: ["2024-11-12", "2024-11-14"]` (intentional date mismatch), `maxBudgetAmount: 500, budgetCurrency: "EUR"`
     - **Grocery Run**: category Groceries, 95.00 USD, no travel dates

@@ -398,3 +398,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/lib/spend-status.ts`, `src/store/__tests__/useSpendGuardStore.property.test.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** Warning and exceeded cannot both be true, so warning is "80% or more and still under the limit". The property text says both thresholds are iff conditions, which overlap once spend passes the limit. The task list for the progress bar says the same thing: warning only when it is not exceeded. 69 tests pass, build is clean.
+
+---
+
+## Task 10.1 — Simulator presets
+
+**Timestamp:** 2026-10-30T18:16:14Z
+
+**My prompt:** Implement the four simulator presets. Use future dates in 2026-2027, and keep the Hotel Lisbon checkout one day off so the demo shows a mismatch.
+
+**What the AI did:** Added `src/lib/simulator-presets.ts` with Coffee Shop (Dining, 8.50 USD), Hotel Lisbon (Travel, 480 EUR, purchase checkout 2026-11-15 against intent 2026-11-14), Grocery Run (Groceries, 95 USD), and Flight Tokyo (Travel, 85000 JPY, matching dates 2027-03-01 to 2027-03-08). Each preset fills intent text and the structured fields.
+
+**Files touched:** `src/lib/simulator-presets.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** The design still shows 2024 dates. Those are in the past relative to this assignment, so the presets use November 2026 and March 2027 instead. The off-by-one checkout is unchanged. Build is clean.
