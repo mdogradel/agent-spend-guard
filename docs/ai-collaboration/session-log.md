@@ -286,3 +286,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/lib/__tests__/rules-engine.property.test.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** Property 2 passes the same `evaluatedAt` into both calls. The default clock would make two otherwise identical decisions differ by a millisecond, which is not a rules difference. 44 tests pass, build is clean.
+
+---
+
+## Task 6.1 — Implement the mismatch checker
+
+**Timestamp:** 2026-10-30T18:10:12Z
+
+**My prompt:** Implement task 6.1. 5% price grace, exact date match, and skip the price check when no rate is available.
+
+**What the AI did:** Added `src/lib/mismatch-checker.ts`. No-intent purchases return an empty flag list. When the purchase currency matches the budget currency, the price check compares those amounts directly. When they differ, the USD equivalent is converted into the budget currency with the cached rate, then compared with a 5% grace. A missing rate sets `priceCheckSkipped` and `priceCheckSkipReason` and does not raise a price flag. Dates are exact ISO strings. Category compare is case-insensitive after trim.
+
+**Files touched:** `src/lib/mismatch-checker.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** Requirements 7.4 and properties 9-10 compare in the budget currency. Design fix 3 compares both sides in USD and skips when a rate is missing. Those are the same math when a rate exists (dividing the USD amount by the budget currency's USD rate). I kept the direct same-currency path so a EUR intent against a EUR charge does not depend on a rate being cached. Build is clean. The new file has no tests yet; those are task 6.2.

@@ -107,7 +107,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - _Minimum 100 iterations per property_
 
 - [ ] 6. Implement the mismatch checker
-  - [ ] 6.1 Create `src/lib/mismatch-checker.ts` with `checkMismatches` pure function
+  - [x] 6.1 Create `src/lib/mismatch-checker.ts` with `checkMismatches` pure function
     - Return empty array immediately when both `intentText` and all `StructuredIntent` fields are absent
     - Price check: skip if `maxBudgetAmount` or `budgetCurrency` absent; convert purchase to `budgetCurrency` via `fxCache`; flag if `purchaseAmountInBudgetCurrency > maxBudgetAmount * 1.05`; record `priceCheckSkipped = true` if rate missing or `usdEquivalentAmount` is null
     - Date check: skip if `structuredIntent.travelDates` absent or empty; flag any date in intent not present in `purchase.travelDates` (exact ISO 8601 string comparison)
