@@ -384,3 +384,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/store/useSpendGuardStore.ts`, `src/lib/monthly-reset.ts`, `src/lib/persistence.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** `safeRead` now records which keys failed to parse so hydrate can show the storage banner without treating a missing key as corrupt. USD purchases store a USD equivalent too, otherwise the dashboard would show zero spend for them. Duplicate rule names are exact matches, as requirement 1.8 says. 63 existing tests still pass, build is clean. Store properties are task 9.2.
+
+---
+
+## Task 9.2 — Property tests for the store
+
+**Timestamp:** 2026-10-30T18:15:25Z
+
+**My prompt:** Write fast-check properties 12 through 17 for the store, dashboard thresholds, and persistence.
+
+**What the AI did:** Added `src/lib/spend-status.ts` and `src/store/__tests__/useSpendGuardStore.property.test.ts`. Covered dispute visibility, the 80% warning versus exceeded states, committed spend including pending (and the excluding getter), JSON round-trips, monthly reset, and corrupt-key isolation.
+
+**Files touched:** `src/lib/spend-status.ts`, `src/store/__tests__/useSpendGuardStore.property.test.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** Warning and exceeded cannot both be true, so warning is "80% or more and still under the limit". The property text says both thresholds are iff conditions, which overlap once spend passes the limit. The task list for the progress bar says the same thing: warning only when it is not exceeded. 69 tests pass, build is clean.

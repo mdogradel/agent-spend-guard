@@ -155,7 +155,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
 - [x] 8. Checkpoint — domain layer complete
   - Ensure all unit tests and property-based tests for persistence, FX service, rules engine, mismatch checker, and dispute generator pass (`npx vitest --run`). Ask the user if any clarifications are needed before continuing.
 
-- [ ] 9. Implement Zustand store
+- [x] 9. Implement Zustand store
   - [x] 9.1 Create `src/store/useSpendGuardStore.ts` with full store shape and actions
     - Implement `SpendGuardState` interface with all persisted fields (`rules`, `receipts`, `fxCache`, `lastSeenMonth`), transient UI fields (`storageWarning`, `storageWarningMessage`), and all actions
     - Implement `committedSpend()` derived getter: filters receipts for current calendar month, sums USD amounts for `auto_approved`, `approved`, and `needs_approval` statuses by category and merchant
@@ -171,7 +171,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Initialise store by reading all four `asg_` keys via `safeRead` on creation
     - _Requirements: 1.5, 1.7, 3.2, 4.1, 5.2, 5.3, 5.4, 5.5, 5.6, 6.1, 6.2, 6.3, 6.4, 10.1–10.7_
 
-  - [ ]* 9.2 Write property-based tests for Zustand store (fast-check)
+  - [x]* 9.2 Write property-based tests for Zustand store (fast-check)
     - **Property 12: Dispute button visibility matches mismatch presence** — receipt with `mismatches.length > 0` → dispute button rendered; receipt with empty mismatches → dispute button absent (tested via store state, UI rendering tested in Playwright)
     - **Validates: Requirements 8.1, 8.6**
     - **Property 13: Dashboard visual state thresholds are correct** — for any (committedSpend, limitAmount) pair, warning state ↔ `committedSpend / limitAmount >= 0.8`; exceeded state ↔ `committedSpend >= limitAmount`; mutually exclusive
