@@ -482,3 +482,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/components/PurchaseCard.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** None. 69 tests pass, build is clean.
+
+---
+
+## Task 11.6 — Overage warning modal
+
+**Timestamp:** 2026-10-30T18:18:31Z
+
+**My prompt:** Add the modal that warns before an approval which would exceed a limit, with Decline and Override Once.
+
+**What the AI did:** Added `src/components/OverageWarningModal.tsx`. It shows the overage sentence from the store and the two actions.
+
+**Files touched:** `src/components/OverageWarningModal.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** None. 69 tests pass, build is clean.

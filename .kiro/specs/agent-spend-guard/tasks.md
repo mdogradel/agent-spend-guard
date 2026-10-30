@@ -226,7 +226,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Approve and Decline buttons
     - _Requirements: 5.1_
 
-  - [ ] 11.6 Create `src/components/OverageWarningModal.tsx`
+  - [x] 11.6 Create `src/components/OverageWarningModal.tsx`
     - Modal dialog displaying the specific overage string (e.g., "Approving this puts Dining $60.00 over the $300.00 monthly limit")
     - Presents Decline and Override Once buttons
     - _Requirements: 5.3, 5.5_
