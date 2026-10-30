@@ -426,3 +426,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/components/NavBar.tsx`, `src/lib/format.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** The badge shows zero as well as a positive count, so it is obvious when the inbox is clear. Build is clean. The bar is not mounted until the layout task.
+
+---
+
+## Task 11.2 — Spend progress bar
+
+**Timestamp:** 2026-10-30T18:16:46Z
+
+**My prompt:** Add the spend progress bar with warning and exceeded states.
+
+**What the AI did:** Added `src/components/SpendProgressBar.tsx`. It shows the label, committed and limit amounts, and remaining headroom. It uses `spendVisualState`, so 80% and above is a warning and reaching the limit switches to exceeded. The two states do not apply together.
+
+**Files touched:** `src/components/SpendProgressBar.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** None. 69 tests pass, build is clean.

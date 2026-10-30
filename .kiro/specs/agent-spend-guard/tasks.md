@@ -202,7 +202,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Mark as `"use client"`
     - _Requirements: 5.7_
 
-  - [ ] 11.2 Create `src/components/SpendProgressBar.tsx`
+  - [x] 11.2 Create `src/components/SpendProgressBar.tsx`
     - Props: `label`, `committed`, `limit` (all numbers)
     - Renders label, committed/limit amounts, remaining headroom
     - Applies warning colour class when `committed / limit >= 0.8` (and not exceeded)
