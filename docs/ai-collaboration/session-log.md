@@ -636,3 +636,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/app/inbox/page.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** None. 69 tests pass, build is clean.
+
+---
+
+## Task 12.7 — Receipts list
+
+**Timestamp:** 2026-10-30T18:24:30Z
+
+**My prompt:** List every intent receipt, newest first, with a link to the detail page.
+
+**What the AI did:** Added `src/app/receipts/page.tsx`. Each row shows merchant, category, USD amount, status, and an orange dot when there is a mismatch. The row links to `/receipts/[id]`.
+
+**Files touched:** `src/app/receipts/page.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** None. 69 tests pass, build is clean.

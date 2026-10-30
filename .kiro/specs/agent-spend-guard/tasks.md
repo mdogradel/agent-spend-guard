@@ -294,7 +294,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Show `expired: monthly reset` label on expired receipts (non-interactive)
     - _Requirements: 5.1–5.8_
 
-  - [ ] 12.7 Create `src/app/receipts/page.tsx` — Intent Receipts list page
+  - [x] 12.7 Create `src/app/receipts/page.tsx` — Intent Receipts list page
     - Table/list of all receipts in reverse-chronological order
     - Each row: merchant, category, amount, status badge, mismatch indicator
     - Each row links to `/receipts/[id]`
