@@ -197,3 +197,44 @@ Four targeted fixes applied after the initial design draft.
 **Verification:** `npx tsc --noEmit` and `npm run build` both pass with zero errors.
 
 **Anything changed or rejected:** None.
+
+---
+
+## Task 3 — Implement persistence layer
+
+**What the user asked:** Resume from Task 3.
+
+**What was done:**
+- Created `src/lib/persistence.ts` with:
+  - `STORAGE_KEYS` constant (`asg_rules`, `asg_receipts`, `asg_fx_cache`, `asg_monthly`)
+  - `isLocalStorageAvailable()` — SSR-safe probe, returns false in private browsing
+  - `safeRead<T>(key, fallback)` — JSON.parse in try/catch, corrupt entries discarded per-key
+  - `safeWrite<T>(key, value)` — returns false on QuotaExceededError or SecurityError
+  - Typed convenience helpers: `readRules/writeRules`, `readReceipts/writeReceipts`, `readFxCache/writeFxCache`, `readMonthly/writeMonthly`
+- Created `src/lib/__tests__/persistence.test.ts` with 12 unit tests covering all cases from the design spec.
+- Fixed three dependency issues discovered during task:
+  - `vite` was missing (peer dep of vitest) — installed
+  - `@testing-library/dom` was missing (peer dep of jest-dom) — installed
+  - `vitest.config.ts` was being loaded as CJS — renamed to `.mts` and replaced `__dirname` with `import.meta.url`
+
+**Verification:** 12/12 tests pass, `npm run build` clean.
+
+**Anything changed or rejected:** None.
+
+---
+
+## Task 4 — Implement FX conversion service
+
+**What the user asked:** Continue with task 4.
+
+**What was done:**
+- Created `src/lib/fx-service.ts` with:
+  - `fetchFxRate(from, to, timeoutMs)` — encapsulated Frankfurter API call (`/v1/latest?base=&symbols=`), parses `response.rates[to]`, uses `AbortController` for 5s timeout, throws on non-ok status or unexpected shape
+  - `convertToUSD(amount, fromCurrency, cache, timeoutMs)` — full cache-lookup logic: USD passthrough → cache hit < 24h → fresh fetch → stale fallback → `failed: true`
+  - Returns `{ result: FxResult, updatedCache: FxRateCache }` so caller can write cache before completing purchase (write-before-confirm)
+  - Rates rounded to 6 decimal places via `roundTo6()`
+- Created `src/lib/__tests__/fx-service.test.ts` with 13 unit tests covering all 5 cases from the design spec plus rounding, case-insensitive USD, and timeout scenarios. All fetch calls mocked — no real network.
+
+**Verification:** 25/25 tests pass (12 persistence + 13 FX service), build clean.
+
+**Anything changed or rejected:** None.
