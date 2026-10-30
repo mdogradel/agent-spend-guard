@@ -210,7 +210,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Warning and exceeded states are mutually exclusive
     - _Requirements: 9.1, 9.2, 9.3, 9.4_
 
-  - [ ] 11.3 Create `src/components/StorageWarningBanner.tsx`
+  - [x] 11.3 Create `src/components/StorageWarningBanner.tsx`
     - Non-blocking banner (not a modal) visible at top of page without obscuring content
     - Reads `storageWarning` and `storageWarningMessage` from store
     - Renders dismiss button that calls `dismissStorageWarning()`

@@ -440,3 +440,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/components/SpendProgressBar.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** None. 69 tests pass, build is clean.
+
+---
+
+## Task 11.3 — Storage warning banner
+
+**Timestamp:** 2026-10-30T18:17:11Z
+
+**My prompt:** Add a non-blocking banner for localStorage failures, with a dismiss button.
+
+**What the AI did:** Added `src/components/StorageWarningBanner.tsx`. It reads `storageWarning` and `storageWarningMessage` from the store and calls `dismissStorageWarning`. It sits in normal flow, not a modal.
+
+**Files touched:** `src/components/StorageWarningBanner.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** None. 69 tests pass, build is clean. The layout mounts it in task 12.1.
