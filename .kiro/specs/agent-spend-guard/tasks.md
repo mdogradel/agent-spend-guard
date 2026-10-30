@@ -77,7 +77,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Concatenate all `RuleFailure.explanation` strings into `EngineDecision.explanation`
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 4.10, 4.11, 4.12_
 
-  - [ ]* 5.2 Write unit tests for rules engine
+  - [x]* 5.2 Write unit tests for rules engine
     - Invalid amount (0 and negative) → `declined`, short-circuit, only `invalid_amount` failure
     - FX failed → `needs_approval`, short-circuit
     - Blocked category → `declined`, ignores threshold and limit rules

@@ -258,3 +258,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/lib/rules-engine.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** Money comparisons use integer cents so floating point does not flip a one-cent overage. `evaluatedAt` is an optional argument so tests can pin the timestamp; the default is the current UTC time. No behavior was dropped from the spec.
+
+---
+
+## Task 5.2 — Unit tests for the rules engine
+
+**Timestamp:** 2026-10-30T18:08:15Z
+
+**My prompt:** Write the task 5.2 unit tests for `evaluateRules`.
+
+**What the AI did:** Added `src/lib/__tests__/rules-engine.test.ts`. Covered invalid amounts (zero and negative), FX short-circuit, blocked category ignoring later rules, threshold strictly over $50, exact threshold auto-approval, no-intent, exact category headroom, one-cent category overage, four simultaneous failures with a concatenated explanation, and a clean auto-approval.
+
+**Files touched:** `src/lib/__tests__/rules-engine.test.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** Added the exact-threshold case even though the task list only said "exceeded". That was the pushback that $50 exactly should go through, and it is cheap to lock in. 37 tests pass, build is clean.
