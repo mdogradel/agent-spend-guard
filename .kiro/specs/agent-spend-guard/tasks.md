@@ -196,7 +196,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - _Requirements: 2.1, 2.2_
 
 - [ ] 11. Implement shared UI components
-  - [ ] 11.1 Create `src/components/NavBar.tsx` with `PendingBadge`
+  - [x] 11.1 Create `src/components/NavBar.tsx` with `PendingBadge`
     - Full-width top navigation with links to `/dashboard`, `/inbox`, `/rules`, `/simulator`, `/receipts`
     - `PendingBadge` reads `pendingCount()` from store; renders a numeric badge on the Inbox link; updates immediately after approve/decline
     - Mark as `"use client"`

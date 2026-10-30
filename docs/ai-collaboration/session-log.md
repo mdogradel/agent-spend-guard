@@ -412,3 +412,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/lib/simulator-presets.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** The design still shows 2024 dates. Those are in the past relative to this assignment, so the presets use November 2026 and March 2027 instead. The off-by-one checkout is unchanged. Build is clean.
+
+---
+
+## Task 11.1 — Navigation bar
+
+**Timestamp:** 2026-10-30T18:16:14Z
+
+**My prompt:** Add the top navigation and a live pending-count badge on Inbox.
+
+**What the AI did:** Added `src/components/NavBar.tsx` with links to dashboard, inbox, rules, simulator, and receipts. `PendingBadge` reads `pendingCount()` from the store and renders on the Inbox link. Also added `src/lib/format.ts` for shared currency and date formatting the later screens will use.
+
+**Files touched:** `src/components/NavBar.tsx`, `src/lib/format.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** The badge shows zero as well as a positive count, so it is obvious when the inbox is clear. Build is clean. The bar is not mounted until the layout task.
