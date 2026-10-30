@@ -706,3 +706,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `tests/hotel-lisbon-dispute.spec.ts`, `.gitignore`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** The trimmed plan is two scenarios, approval and Hotel Lisbon. Task 14.5 itself asks for both the clipboard path and the fallback, so the dispute file has two tests. All three Playwright tests passed. 69 unit tests pass, build is clean.
+
+---
+
+## Task 15 — Final checkpoint
+
+**Timestamp:** 2026-10-30T18:31:05Z
+
+**My prompt:** Finish the checkpoint. `npm run build` and `npm test` must pass, the Playwright tests must pass, and the app has to be able to deploy on Vercel. Replace the starter README.
+
+**What the AI did:** Replaced `README.md` with a plain description of the app, how to run it, the rules engine, FX, receipts, and disputes, how the work moved from Kiro to Cursor, the limitations, and the next steps (Stripe Issuing sandbox, real auth, multi-user). Added `.npmrc` with `legacy-peer-deps=true` because a clean `npm ci` otherwise fails on a Vitest and `@types/node` peer conflict, which would break a Vercel install. Re-ran the unit tests (69 passing), the production build, and all 3 Playwright tests (passing). `vercel.json` is still present.
+
+**Files touched:** `README.md`, `.npmrc`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** None of the product behavior changed in this step. The peer-deps flag is an install workaround, not a change to the app.

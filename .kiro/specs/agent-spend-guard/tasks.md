@@ -318,7 +318,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Test: mock clipboard unavailable; assert fallback `<textarea>` rendered with non-empty dispute text
     - _Requirements: 8.1, 8.4, 8.5_
 
-- [ ] 15. Final checkpoint — all tests pass
+- [x] 15. Final checkpoint — all tests pass
   - Ensure all unit tests, property-based tests, and Playwright integration tests pass. Confirm Vercel deployment config (`vercel.json`) is present. Ask the user if any questions remain.
 
 ## Notes
