@@ -279,7 +279,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Show decision result (outcome badge + explanation) after submission
     - _Requirements: 2.1–2.6_
 
-  - [ ] 12.5 Create `src/app/dashboard/page.tsx` — Dashboard page
+  - [x] 12.5 Create `src/app/dashboard/page.tsx` — Dashboard page
     - Render `<SpendProgressBar>` for each Category_Limit and Merchant_Limit
     - Render summary rows for total category spend vs limits and total merchant spend vs limits
     - Render `<ActivityFeedItem>` list for the 20 most recent receipts (reverse chronological)

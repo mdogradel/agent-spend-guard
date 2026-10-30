@@ -608,3 +608,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/app/simulator/page.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** None. 69 tests pass, build is clean. The page copy calls out the Hotel Lisbon date mismatch so the demo path is obvious.
+
+---
+
+## Task 12.5 — Dashboard
+
+**Timestamp:** 2026-10-30T18:23:33Z
+
+**My prompt:** Add the dashboard with spend bars, summary rows, and the last 20 receipts.
+
+**What the AI did:** Added `src/app/dashboard/page.tsx`. Each category and merchant limit gets a progress bar. Two summary rows total the spend and the configured limits. The activity list is the 20 newest receipts. Figures come from `committedSpend()` on each render, so a navigation recalculates them. Pending purchases are already inside that total.
+
+**Files touched:** `src/app/dashboard/page.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** None. 69 tests pass, build is clean.
