@@ -370,3 +370,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** No open questions that block the store or the UI. Continuing with task 9.
+
+---
+
+## Task 9.1 — Zustand store
+
+**Timestamp:** 2026-10-30T18:14:02Z
+
+**My prompt:** Implement task 9.1. Include `committedSpendExcluding` so approval does not count a pending receipt twice.
+
+**What the AI did:** Added `src/store/useSpendGuardStore.ts` and `src/lib/monthly-reset.ts`. The store loads the four `asg_` keys on hydrate, writes before it updates memory, and keeps the in-memory change if a write fails. `submitPurchase` converts currency, runs the rules engine and the mismatch checker, and stores an intent receipt. `approvePurchase` re-checks limits with that receipt excluded and returns the overage string instead of approving when the limit would break. Decline and override update the receipt. Monthly reset uses the local timezone and expires only older pending receipts.
+
+**Files touched:** `src/store/useSpendGuardStore.ts`, `src/lib/monthly-reset.ts`, `src/lib/persistence.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** `safeRead` now records which keys failed to parse so hydrate can show the storage banner without treating a missing key as corrupt. USD purchases store a USD equivalent too, otherwise the dashboard would show zero spend for them. Duplicate rule names are exact matches, as requirement 1.8 says. 63 existing tests still pass, build is clean. Store properties are task 9.2.

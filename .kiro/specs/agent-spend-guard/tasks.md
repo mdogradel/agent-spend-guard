@@ -156,7 +156,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
   - Ensure all unit tests and property-based tests for persistence, FX service, rules engine, mismatch checker, and dispute generator pass (`npx vitest --run`). Ask the user if any clarifications are needed before continuing.
 
 - [ ] 9. Implement Zustand store
-  - [ ] 9.1 Create `src/store/useSpendGuardStore.ts` with full store shape and actions
+  - [x] 9.1 Create `src/store/useSpendGuardStore.ts` with full store shape and actions
     - Implement `SpendGuardState` interface with all persisted fields (`rules`, `receipts`, `fxCache`, `lastSeenMonth`), transient UI fields (`storageWarning`, `storageWarningMessage`), and all actions
     - Implement `committedSpend()` derived getter: filters receipts for current calendar month, sums USD amounts for `auto_approved`, `approved`, and `needs_approval` statuses by category and merchant
     - Implement `committedSpendExcluding(receiptId)` getter: same as `committedSpend()` but excludes the specified receipt to prevent double-counting at approval time
