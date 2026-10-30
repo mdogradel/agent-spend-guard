@@ -221,7 +221,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Shows merchant, category, USD amount, decision badge (colour-coded by status), mismatch indicator dot
     - _Requirements: 9.5_
 
-  - [ ] 11.5 Create `src/components/PurchaseCard.tsx`
+  - [x] 11.5 Create `src/components/PurchaseCard.tsx`
     - Shows agent name, merchant name, category, USD amount with FX indicator if applicable, original intent text, rules engine reason
     - Approve and Decline buttons
     - _Requirements: 5.1_

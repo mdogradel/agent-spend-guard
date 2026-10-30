@@ -468,3 +468,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/components/ActivityFeedItem.tsx`, `src/components/StatusBadge.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** Auto-approved receipts use the same "Approved" badge as manual approvals, matching the dashboard requirement. The detail page can still show the raw status. 69 tests pass, build is clean.
+
+---
+
+## Task 11.5 — Purchase card
+
+**Timestamp:** 2026-10-30T18:18:10Z
+
+**My prompt:** Add the pending-purchase card for the approvals inbox.
+
+**What the AI did:** Added `src/components/PurchaseCard.tsx`. It shows the agent, merchant, category, USD amount, the original amount and FX rate when the charge is not in USD, a stale-rate note, the intent text, the rules explanation, and Approve and Decline buttons.
+
+**Files touched:** `src/components/PurchaseCard.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** None. 69 tests pass, build is clean.
