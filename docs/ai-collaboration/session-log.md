@@ -622,3 +622,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/app/dashboard/page.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** None. 69 tests pass, build is clean.
+
+---
+
+## Task 12.6 — Approvals inbox
+
+**Timestamp:** 2026-10-30T18:23:58Z
+
+**My prompt:** Add the inbox. Approve re-checks the limit, and an overage opens Decline or Override Once. Expired items stay visible but cannot be acted on.
+
+**What the AI did:** Added `src/app/inbox/page.tsx`. Pending receipts render as purchase cards, newest first. Approve calls `approvePurchase`. A returned overage string opens the modal. Override Once writes the override log. Decline marks the receipt declined. Expired receipts show the label "expired: monthly reset" and have no buttons.
+
+**Files touched:** `src/app/inbox/page.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** None. 69 tests pass, build is clean.

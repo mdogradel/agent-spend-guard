@@ -286,7 +286,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Recalculate all spend figures from store on each navigation to page
     - _Requirements: 9.1–9.8_
 
-  - [ ] 12.6 Create `src/app/inbox/page.tsx` — Approvals Inbox page
+  - [x] 12.6 Create `src/app/inbox/page.tsx` — Approvals Inbox page
     - Render `<PurchaseCard>` for each pending receipt in reverse-chronological order
     - On Approve click: call `store.approvePurchase(id)`; if overage returned, show `<OverageWarningModal>`
     - On Decline click: call `store.declinePurchase(id)`
