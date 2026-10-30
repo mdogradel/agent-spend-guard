@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "AI collaboration log",
+      "trigger": "Stop",
+      "action": {
+        "type": "agent",
+        "prompt": "Append a new entry to docs/ai-collaboration/session-log.md (create the folder and file if missing). Format:\n## <timestamp>\n**My prompt:** <my last prompt, verbatim>\n**What Kiro did:** <2-3 line summary>\n**Files touched:** <list>\n**Decisions / pushback:** <any choice I made or correction I gave, or \"none\">\nNever edit or delete earlier entries."
+      },
+      "description": "Captures each agent turn into docs/ai-collaboration/session-log.md so reviewers can see how I worked with Kiro.",
+      "enabled": true
+    }
+  ]
+}
