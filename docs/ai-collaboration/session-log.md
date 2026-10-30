@@ -524,3 +524,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/components/SimulatorForm.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** Purchase travel dates are editable too. The task list names the structured dates, but the Hotel Lisbon mismatch is on the purchase dates, and hiding them would make the off-by-one impossible to see or correct. 69 tests pass, build is clean.
+
+---
+
+## Task 11.9 — Receipt detail
+
+**Timestamp:** 2026-10-30T18:20:39Z
+
+**My prompt:** Add the full intent receipt view, including mismatches, the FX rate, and the override log.
+
+**What the AI did:** Added `src/components/IntentReceiptDetail.tsx`. It shows the purchase, the USD equivalent, the rate to 6 decimal places, a "rate may be stale" note, the intent, every rule failure, mismatch flags, a skipped price check, and any override.
+
+**Files touched:** `src/components/IntentReceiptDetail.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** None. 69 tests pass, build is clean.

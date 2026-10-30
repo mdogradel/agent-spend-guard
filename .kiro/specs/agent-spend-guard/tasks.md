@@ -244,7 +244,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Submit calls `store.submitPurchase(request)` and displays the resulting decision
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6_
 
-  - [ ] 11.9 Create `src/components/IntentReceiptDetail.tsx`
+  - [x] 11.9 Create `src/components/IntentReceiptDetail.tsx`
     - Renders all receipt fields: purchase details, USD equivalent + FX rate, decision outcome badge, failure explanations, mismatch flags, override log
     - Shows "rate may be stale" indicator when `fxRate.isStale === true`
     - Conditionally renders mismatch indicator section
