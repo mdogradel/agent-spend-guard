@@ -356,3 +356,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/lib/__tests__/dispute-generator.property.test.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** None. 63 tests pass, build is clean.
+
+---
+
+## Task 8 — Checkpoint, domain layer complete
+
+**Timestamp:** 2026-10-30T18:12:32Z
+
+**My prompt:** Stop at the task 8 checkpoint, record the results, and keep going. Do not wait for a reply.
+
+**What the AI did:** Re-ran `npm test` and `npm run build`. 7 files, 63 tests, all passing. The production build completed and still only prerenders `/` and `/_not-found`, which is expected because no app routes exist yet. Persistence, FX, rules engine, mismatch checker, and dispute generator are all covered.
+
+**Files touched:** `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** No open questions that block the store or the UI. Continuing with task 9.

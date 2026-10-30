@@ -152,7 +152,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - **Property 11: Dispute summary contains all required fields** — any receipt with ≥ 1 mismatch → output contains intent text (or no-intent marker), each mismatch type and detail, decision outcome, explanation, UTC timestamp, and no HTML tags
     - **Validates: Requirements 8.2, 8.3**
 
-- [ ] 8. Checkpoint — domain layer complete
+- [x] 8. Checkpoint — domain layer complete
   - Ensure all unit tests and property-based tests for persistence, FX service, rules engine, mismatch checker, and dispute generator pass (`npx vitest --run`). Ask the user if any clarifications are needed before continuing.
 
 - [ ] 9. Implement Zustand store
