@@ -272,3 +272,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/lib/__tests__/rules-engine.test.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** Added the exact-threshold case even though the task list only said "exceeded". That was the pushback that $50 exactly should go through, and it is cheap to lock in. 37 tests pass, build is clean.
+
+---
+
+## Task 5.3 — Property tests for the rules engine
+
+**Timestamp:** 2026-10-30T18:09:35Z
+
+**My prompt:** Write the seven fast-check properties for the rules engine, 100 runs each.
+
+**What the AI did:** Added `src/lib/__tests__/rules-engine.property.test.ts` with properties 1 through 7. Each test carries the `Feature: agent-spend-guard, Property N` comment. Amounts are generated in cents so the headroom property stays exact.
+
+**Files touched:** `src/lib/__tests__/rules-engine.property.test.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** Property 2 passes the same `evaluatedAt` into both calls. The default clock would make two otherwise identical decisions differ by a millisecond, which is not a rules difference. 44 tests pass, build is clean.

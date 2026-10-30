@@ -62,7 +62,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - API failure + no cache — returns `failed = true`
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5_
 
-- [ ] 5. Implement the rules engine
+- [x] 5. Implement the rules engine
   - [x] 5.1 Create `src/lib/rules-engine.ts` with `evaluateRules` pure function
     - Implement the seven-step evaluation order with correct short-circuit behaviour (steps 1–3) and collect-all-failures model (steps 4–7)
     - Step 1: invalid amount (≤ 0) → `declined`, short-circuit
@@ -89,7 +89,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - All rules pass → `auto_approved`, empty failure list
     - _Requirements: 4.1–4.12_
 
-  - [ ]* 5.3 Write property-based tests for rules engine (fast-check)
+  - [x]* 5.3 Write property-based tests for rules engine (fast-check)
     - **Property 1: Blocked category always produces declined** — for any request with a matching blocked category (and valid amount), outcome is `declined` with only a `blocked_category` failure
     - **Validates: Requirements 4.3, 4.7**
     - **Property 2: Rules engine is deterministic** — calling `evaluateRules` twice with identical inputs produces identical `EngineDecision` objects
