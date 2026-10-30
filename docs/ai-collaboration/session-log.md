@@ -692,3 +692,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `tests/approval-override.spec.ts`, `vitest.config.mts`, `next.config.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** The $3.50 figure is the overage with this receipt excluded. Counting it twice would have said $12.00. The test passed. Unit tests still 69, build is clean.
+
+---
+
+## Task 14.5 — Hotel Lisbon dispute Playwright tests
+
+**Timestamp:** 2026-10-30T18:29:59Z
+
+**My prompt:** Cover the Hotel Lisbon dispute: the copy button, and the textarea fallback when the clipboard is missing.
+
+**What the AI did:** Added `tests/hotel-lisbon-dispute.spec.ts`. Both tests submit the Hotel Lisbon preset with the Frankfurter call mocked, open the receipt, and see the Dispute button. One asserts `clipboard.writeText` receives a summary that includes `date_mismatch`. The other removes the clipboard API and asserts the textarea has that same summary. Playwright output is gitignored.
+
+**Files touched:** `tests/hotel-lisbon-dispute.spec.ts`, `.gitignore`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** The trimmed plan is two scenarios, approval and Hotel Lisbon. Task 14.5 itself asks for both the clipboard path and the fallback, so the dispute file has two tests. All three Playwright tests passed. 69 unit tests pass, build is clean.

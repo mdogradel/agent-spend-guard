@@ -308,12 +308,12 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
 - [x] 13. Checkpoint — full feature wired end-to-end
   - Ensure all unit and property-based tests still pass (`npx vitest --run`). Manually verify the four simulator presets produce expected decisions and the Hotel Lisbon preset triggers a date mismatch flag. Ask the user if any clarifications are needed before writing integration tests.
 
-- [ ]* 14. Write Playwright integration tests
+- [x]* 14. Write Playwright integration tests
   - [x]* 14.2 Approvals Inbox approve-with-overage flow
     - Test: configure a Category_Limit below the pending purchase amount; navigate to Inbox; click Approve → `OverageWarningModal` appears with correct overage text; click Override Once → receipt moves out of Inbox, override log present on receipt detail
     - _Requirements: 5.2, 5.3, 5.5_
 
-  - [ ]* 14.5 Dispute summary copy and fallback
+  - [x]* 14.5 Dispute summary copy and fallback
     - Test: submit Hotel Lisbon preset (triggers date mismatch); navigate to receipt detail; assert Dispute button visible; click Dispute; assert `navigator.clipboard.writeText` called with non-empty string
     - Test: mock clipboard unavailable; assert fallback `<textarea>` rendered with non-empty dispute text
     - _Requirements: 8.1, 8.4, 8.5_
