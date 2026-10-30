@@ -454,3 +454,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/components/StorageWarningBanner.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** None. 69 tests pass, build is clean. The layout mounts it in task 12.1.
+
+---
+
+## Task 11.4 — Activity feed item
+
+**Timestamp:** 2026-10-30T18:17:48Z
+
+**My prompt:** Add a row for the dashboard activity feed.
+
+**What the AI did:** Added `src/components/ActivityFeedItem.tsx` and a shared `StatusBadge`. The row shows merchant, category, USD amount, a status badge, and an orange dot when the receipt has a mismatch. The row links to the receipt.
+
+**Files touched:** `src/components/ActivityFeedItem.tsx`, `src/components/StatusBadge.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** Auto-approved receipts use the same "Approved" badge as manual approvals, matching the dashboard requirement. The detail page can still show the raw status. 69 tests pass, build is clean.

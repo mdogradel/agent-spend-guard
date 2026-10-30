@@ -216,7 +216,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Renders dismiss button that calls `dismissStorageWarning()`
     - _Requirements: 10.6, 10.7_
 
-  - [ ] 11.4 Create `src/components/ActivityFeedItem.tsx`
+  - [x] 11.4 Create `src/components/ActivityFeedItem.tsx`
     - Props: subset of `IntentReceipt` fields needed for a single row
     - Shows merchant, category, USD amount, decision badge (colour-coded by status), mismatch indicator dot
     - _Requirements: 9.5_
