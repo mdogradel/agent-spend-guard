@@ -734,3 +734,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/lib/fx-fallback.ts`, `src/lib/fx-service.ts`, `src/types/index.ts`, `src/store/useSpendGuardStore.ts`, `src/components/IntentReceiptDetail.tsx`, `src/components/PurchaseCard.tsx`, `src/components/SimulatorForm.tsx`, `src/lib/dispute-generator.ts`, `src/lib/__tests__/fx-service.test.ts`, `README.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** A stale cached live rate still wins over the bundled table, because that was an actual quote. The sample rules also include a $50 approval threshold. About $536 is under the $2,000 Travel limit, but it is over $50, so Hotel Lisbon still waits for approval when those sample rules are loaded. The reason is the threshold, not a missing rate. 74 unit tests pass, and the production build is clean.
+
+---
+
+## Dashboard crash — React error 185 after the Vercel deploy
+
+**Timestamp:** 2026-10-30T18:52:41Z
+
+**My prompt:** `/` and `/dashboard` crash in a fresh browser with Minified React error #185 (maximum update depth). `useSpendGuardStore((state) => state.committedSpend())` returns a new object every call, so Zustand's useSyncExternalStore never settles. Fix that, check the other selectors, and add a production smoke test that fails on pageerror.
+
+**What the AI did:** The dashboard now selects the stable `receipts` array and builds the month totals with `useMemo` and `computeCommittedSpend`. The receipt detail page selects `receipts` and finds the id in `useMemo` instead of deriving inside the selector. I checked the other selectors: rules, receipts, and the action functions are stable references. `pendingCount()` returns a number, so it does not loop. Inbox filters run after the selector, not inside it. Added `tests/page-smoke.spec.ts`, which opens a fresh browser context and visits `/`, `/dashboard`, `/rules`, `/simulator`, `/inbox`, and `/receipts`, failing if any page throws.
+
+**Files touched:** `src/app/dashboard/page.tsx`, `src/app/receipts/[id]/page.tsx`, `tests/page-smoke.spec.ts`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** I did not wrap `pendingCount()` in useMemo. It returns a number, and Object.is treats the same number as unchanged. The smoke test was run against `npm run build && npm start`, not the dev server. It passed. `npm test` is still 74 passing, and the production build is clean.
