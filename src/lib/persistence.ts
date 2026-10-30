@@ -13,6 +13,15 @@ export const STORAGE_KEYS = {
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS]
 
+const corruptReads = new Set<string>()
+
+/** Keys whose last read failed JSON parsing. Cleared when consumed. */
+export function consumeCorruptReads(): string[] {
+  const keys = [...corruptReads]
+  corruptReads.clear()
+  return keys
+}
+
 // ────────────────────────────────────────────────────────────
 // localStorage availability guard
 // ────────────────────────────────────────────────────────────
@@ -51,6 +60,7 @@ export function safeRead<T>(key: string, fallback: T): T {
     return JSON.parse(raw) as T
   } catch {
     console.warn(`[asg] corrupt entry for key "${key}", resetting to fallback`)
+    corruptReads.add(key)
     return fallback
   }
 }

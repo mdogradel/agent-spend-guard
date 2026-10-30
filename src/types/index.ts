@@ -99,6 +99,9 @@ export interface PurchaseRequest {
 // FX Rate Cache
 // ────────────────────────────────────────────────────────────
 
+/** Where a stored USD rate came from. Older receipts may omit this. */
+export type FxRateSource = 'live' | 'cache' | 'fallback';
+
 export interface FxRateCacheEntry {
   fromCurrency: string; // source currency code (e.g. "EUR")
   toCurrency: 'USD';
@@ -106,6 +109,8 @@ export interface FxRateCacheEntry {
   fetchedAt: string;    // ISO 8601 UTC
   /** true when the entry was used after a failed refresh attempt */
   isStale: boolean;
+  /** live Frankfurter quote, a cached live quote, or the bundled fallback table */
+  source?: FxRateSource;
 }
 
 /** Keyed by fromCurrency, e.g. { "EUR": FxRateCacheEntry } */
