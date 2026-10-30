@@ -6,8 +6,8 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
 
 ## Tasks
 
-- [ ] 1. Scaffold Next.js 15 project and configure tooling
-  - [ ] 1.1 Initialise Next.js 15 App Router project with TypeScript, Tailwind CSS, ESLint, and path aliases (`@/`)
+- [x] 1. Scaffold Next.js 15 project and configure tooling
+  - [x] 1.1 Initialise Next.js 15 App Router project with TypeScript, Tailwind CSS, ESLint, and path aliases (`@/`)
     - Run `npx create-next-app@latest` with `--ts --tailwind --eslint --app` flags; confirm `src/` directory layout
     - Add `vitest`, `@vitejs/plugin-react`, `jsdom`, and `@testing-library/react` for unit testing
     - Add `fast-check` for property-based tests
@@ -16,14 +16,14 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Configure `playwright.config.ts` pointing at `http://localhost:3000`
     - _Requirements: 2.6, 10.1_
 
-  - [ ] 1.2 Add Zustand and configure project structure
+  - [x] 1.2 Add Zustand and configure project structure
     - Install `zustand`
     - Create directory skeleton: `src/types/`, `src/lib/`, `src/store/`, `src/components/`, `src/app/`
     - Add `vercel.json` (empty / default config) and confirm `next.config.ts` exports static-compatible settings
     - _Requirements: 1.7, 10.1_
 
-- [ ] 2. Define all TypeScript interfaces and shared types
-  - [ ] 2.1 Create `src/types/index.ts` with all domain types
+- [x] 2. Define all TypeScript interfaces and shared types
+  - [x] 2.1 Create `src/types/index.ts` with all domain types
     - Implement `CategoryLimit`, `MerchantLimit`, `ApprovalThreshold`, `BlockedCategory`, `SpendingRule`, `RuleSet`
     - Implement `StructuredIntent`, `PurchaseRequest`
     - Implement `FxRateCacheEntry`, `FxRateCache`
@@ -33,28 +33,28 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Implement `EngineInput`, `CommittedSpend` (used by rules engine)
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 3.6, 4.1, 7.1, 7.2_
 
-- [ ] 3. Implement persistence layer
-  - [ ] 3.1 Create `src/lib/persistence.ts` with safe localStorage utilities
+- [x] 3. Implement persistence layer
+  - [x] 3.1 Create `src/lib/persistence.ts` with safe localStorage utilities
     - Implement `safeRead<T>(key, fallback): T` — wrap `localStorage.getItem` + `JSON.parse` in try/catch; log warning and return fallback on failure
     - Implement `safeWrite<T>(key, value): boolean` — wrap `localStorage.setItem` + `JSON.stringify` in try/catch; return `false` on `QuotaExceededError` or `SecurityError`
     - Implement `isLocalStorageAvailable(): boolean` — probe with a temp key; return `false` in private browsing environments
     - Export `STORAGE_KEYS` constant object for all four `asg_` prefixed keys
     - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7_
 
-  - [ ]* 3.2 Write unit tests for persistence layer
+  - [x]* 3.2 Write unit tests for persistence layer
     - Test `safeRead` with valid JSON, corrupt JSON (returns fallback), and missing key (returns fallback)
     - Test `safeWrite` with a mock that throws `QuotaExceededError` — must return `false`
     - Test `isLocalStorageAvailable` with a mock that throws on `setItem` — must return `false`
     - _Requirements: 10.6, 10.7_
 
-- [ ] 4. Implement FX conversion service
-  - [ ] 4.1 Create `src/lib/fx-service.ts` with `fetchFxRate` and `convertToUSD`
+- [x] 4. Implement FX conversion service
+  - [x] 4.1 Create `src/lib/fx-service.ts` with `fetchFxRate` and `convertToUSD`
     - Implement `fetchFxRate(from: string, to: string): Promise<number>` — calls `https://api.frankfurter.dev/v1/latest?base={from}&symbols={to}` with a 5-second `AbortController` timeout; parses `response.rates[to]`; throws on 404/422 or unexpected shape
     - Implement `convertToUSD(amount, fromCurrency, cache, timeoutMs?): Promise<{ result: FxResult; updatedCache: FxRateCache }>` with the full cache-lookup logic: USD passthrough → cache hit < 24 h → fresh fetch → stale fallback → failed
     - Round stored rate to 6 decimal places
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6_
 
-  - [ ]* 4.2 Write unit tests for FX service
+  - [x]* 4.2 Write unit tests for FX service
     - USD input — no fetch, rate = 1, `isStale = false`, `failed = false`
     - Cache hit under 24 h — no fetch, returns cached rate
     - Cache over 24 h + successful fetch — updates cache entry, returns fresh rate

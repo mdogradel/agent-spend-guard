@@ -1,5 +1,11 @@
 # AI Collaboration Log — Agent Spend Guard
 
+Phases 1-3 were backfilled from chat after the hook failed. Entries from Task 1 on were written live.
+
+**2026-10-30:** Kiro free credits ran out during Task 4 and upgrading failed, so Tasks 4-15 were completed with a Cursor cloud agent working against the same Kiro spec, directed by Mohit.
+
+The FX service (Task 4) was already in the tree when that handoff happened. I verified it (25 unit tests, production build) and did not rewrite it. Task 5 onward is new work from the same spec.
+
 This log records design decisions, requirement clarifications, pushbacks, and changes made during the AI-assisted spec process. An entry is appended after every task.
 
 ---
@@ -156,7 +162,7 @@ Four targeted fixes applied after the initial design draft.
 
 ---
 
-## Task 1 — Scaffold Next.js 15 project and configure tooling
+## Task 1 — Scaffold Next.js 16 project and configure tooling
 
 **What the user asked:** Start with task 1.
 
