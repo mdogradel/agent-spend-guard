@@ -18,6 +18,7 @@ import { evaluateRules, formatUSD, namesMatch, spendFor } from '@/lib/rules-engi
 import type {
   CommittedSpend,
   FxRateCache,
+  FxRateSource,
   IntentReceipt,
   PurchaseRequest,
   PurchaseStatus,
@@ -333,6 +334,8 @@ export const useSpendGuardStore = create<SpendGuardState>((set, get) => {
 
       const currency = request.currency.trim().toUpperCase()
       const cached = updatedCache[currency]
+      const fxSource: FxRateSource | undefined =
+        result.source === 'usd' ? undefined : result.source
       const fxRate =
         result.failed || currency === 'USD'
           ? null
@@ -340,8 +343,9 @@ export const useSpendGuardStore = create<SpendGuardState>((set, get) => {
               fromCurrency: currency,
               toCurrency: 'USD' as const,
               rate: result.rate,
-              fetchedAt: cached?.fetchedAt ?? now,
+              fetchedAt: result.quotedAt ?? cached?.fetchedAt ?? now,
               isStale: result.isStale,
+              ...(fxSource ? { source: fxSource } : {}),
             }
 
       const receipt: IntentReceipt = {

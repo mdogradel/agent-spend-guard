@@ -27,14 +27,14 @@ Playwright needs a Chromium install the first time: `npx playwright install chro
 
 1. Go to Rules and click Load sample rules. That adds Dining, Travel, and Groceries limits, a $50 approval threshold, and a blocked Gambling category.
 2. Go to the simulator and pick Hotel Lisbon. The stay is 480 EUR. The intent says checkout on 14 November 2026. The booking checks out on 15 November 2026.
-3. Submit it. Open the receipt. You should see a date mismatch and a Dispute button. Dispute copies a plain-text summary. If the browser has no clipboard, the same text appears in a box you can select.
+3. Submit it. The EUR amount is converted to USD. If Frankfurter does not answer in time, the receipt uses the bundled fallback rate and says so. You should see a date mismatch and a Dispute button. Dispute copies a plain-text summary. If the browser has no clipboard, the same text appears in a box you can select. With the sample $50 threshold loaded, this purchase still waits for approval because the USD amount is over $50. It is inside the $2,000 Travel limit. A missing exchange rate is not the reason.
 4. To see the inbox, set a Dining limit below $8.50 and submit Coffee Shop. Approve it. The app warns you about the overage and lets you decline or override once. The override is stored on the receipt.
 
 ## How it is built
 
 The rules engine is a pure function. It does not read the browser or the network. It checks the amount, then a failed currency conversion, then blocked categories. Those three stop the evaluation. After that it collects every other problem: the approval threshold (strictly over the amount), a missing intent, the category limit, and the merchant limit. Exact remaining budget is still inside the limit. The decision text joins every reason.
 
-Foreign amounts are converted to USD before the rules run. The rate comes from `https://api.frankfurter.dev/v1/latest?base={from}&symbols={to}`, and the number used is `rates.USD`. Rates are cached in the browser for 24 hours. If a refresh fails and an older rate exists, that rate is used and the receipt says it may be stale. If there is no rate at all, the purchase goes to the inbox and is never auto-approved.
+Foreign amounts are converted to USD before the rules run. The live rate comes from `https://api.frankfurter.dev/v1/latest?base={from}&symbols={to}`, and the number used is `rates.USD`. The call gives up after about 2.5 seconds. A fresh rate is cached for 24 hours. If a refresh fails and an older live rate is cached, that rate is used and the receipt says it may be stale. If there is no live rate, common currencies (EUR, GBP, JPY, CAD, and a few others) use a bundled fallback table dated 2026-10-30, and the receipt says it is a fallback. A currency that is not in that table, with no cache, still goes to the inbox and is never auto-approved.
 
 The mismatch checker compares the structured intent with the purchase. Price allows a 5% grace. When the currencies match, it compares them directly. When they differ, it converts into the intent's currency with the cached rate. If that rate is missing, it skips the price check and records why. Dates have to match exactly. Hotel Lisbon is off by one day on purpose.
 
@@ -50,7 +50,7 @@ The spec was written in Kiro, in spec mode: requirements, then design, then a ta
 
 - This is mock mode only. A submitted purchase is not sent anywhere.
 - Data lives in one browser profile. Clearing site data clears the rules and the history.
-- Currency conversion needs a network call to Frankfurter the first time a currency is used, and only for currencies that API knows.
+- A live Frankfurter quote is preferred, but the demo does not depend on it. Common currencies fall back to a snapshot from 2026-10-30. An unsupported currency with no cache still cannot be converted.
 - There is one set of rules per browser, not per person.
 - The dev server may mention Next.js instant navigation. These pages depend on localStorage, so they are not a static shell. Validation of that check is left off unless a route opts in.
 

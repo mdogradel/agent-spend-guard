@@ -1,5 +1,6 @@
 'use client'
 
+import { describeRateSource } from '@/lib/fx-service'
 import { formatMoney, formatUSD } from '@/lib/format'
 import type { IntentReceipt } from '@/types'
 
@@ -30,9 +31,8 @@ export function PurchaseCard({ receipt, onApprove, onDecline }: PurchaseCardProp
             <p className="text-xs text-stone-500">
               {formatMoney(purchase.amount, purchase.currency)}
               {receipt.fxRate
-                ? ` · 1 ${receipt.fxRate.fromCurrency} = ${receipt.fxRate.rate.toFixed(6)} USD`
+                ? ` · 1 ${receipt.fxRate.fromCurrency} = ${receipt.fxRate.rate.toFixed(6)} USD · ${describeRateSource(receipt.fxRate)}`
                 : ''}
-              {receipt.fxRate?.isStale ? ' · rate may be stale' : ''}
             </p>
           ) : null}
         </div>

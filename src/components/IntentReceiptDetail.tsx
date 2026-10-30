@@ -1,3 +1,4 @@
+import { describeRateSource } from '@/lib/fx-service'
 import { formatMoney, formatUSD, formatWhen } from '@/lib/format'
 import { StatusBadge } from '@/components/StatusBadge'
 import type { IntentReceipt } from '@/types'
@@ -39,9 +40,9 @@ export function IntentReceiptDetail({ receipt }: { receipt: IntentReceipt }) {
             <span className="font-medium">
               1 {receipt.fxRate.fromCurrency} = {receipt.fxRate.rate.toFixed(6)} USD
             </span>
-            {receipt.fxRate.isStale ? (
-              <span className="mt-1 block text-amber-800">rate may be stale</span>
-            ) : null}
+            <span className="mt-1 block text-stone-600" data-testid="fx-source">
+              {describeRateSource(receipt.fxRate)}
+            </span>
           </p>
         ) : null}
       </section>

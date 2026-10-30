@@ -1,4 +1,5 @@
-import type { FxRateCache, FxRateCacheEntry } from '@/types'
+import { FX_FALLBACK_AS_OF, lookupFallbackRate } from '@/lib/fx-fallback'
+import type { FxRateCache, FxRateCacheEntry, FxRateSource } from '@/types'
 
 // ────────────────────────────────────────────────────────────
 // Types
@@ -9,6 +10,10 @@ export interface FxResult {
   rate: number      // rate used for conversion (1 for USD passthrough)
   isStale: boolean  // true when a cached-but-expired rate was used
   failed: boolean   // true when no rate was available at all
+  /** usd for a dollar charge, otherwise where the rate came from */
+  source: 'usd' | FxRateSource
+  /** When the quote was taken. Null for a USD passthrough or a total failure. */
+  quotedAt: string | null
 }
 
 // ────────────────────────────────────────────────────────────
@@ -16,7 +21,8 @@ export interface FxResult {
 // ────────────────────────────────────────────────────────────
 
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000   // 24 hours
-const DEFAULT_TIMEOUT_MS = 5_000
+/** Short on purpose so a hung Frankfurter call does not stall the demo. */
+export const FX_FETCH_TIMEOUT_MS = 2_500
 const FRANKFURTER_BASE = 'https://api.frankfurter.dev/v1/latest'
 
 // ────────────────────────────────────────────────────────────
@@ -34,7 +40,7 @@ const FRANKFURTER_BASE = 'https://api.frankfurter.dev/v1/latest'
 export async function fetchFxRate(
   from: string,
   to: string,
-  timeoutMs: number = DEFAULT_TIMEOUT_MS,
+  timeoutMs: number = FX_FETCH_TIMEOUT_MS,
 ): Promise<number> {
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), timeoutMs)
@@ -74,12 +80,19 @@ export async function convertToUSD(
   amount: number,
   fromCurrency: string,
   cache: FxRateCache,
-  timeoutMs: number = DEFAULT_TIMEOUT_MS,
+  timeoutMs: number = FX_FETCH_TIMEOUT_MS,
 ): Promise<{ result: FxResult; updatedCache: FxRateCache }> {
   // 1. USD passthrough — no API call needed
   if (fromCurrency.toUpperCase() === 'USD') {
     return {
-      result: { usdAmount: amount, rate: 1, isStale: false, failed: false },
+      result: {
+        usdAmount: amount,
+        rate: 1,
+        isStale: false,
+        failed: false,
+        source: 'usd',
+        quotedAt: null,
+      },
       updatedCache: cache,
     }
   }
@@ -88,14 +101,20 @@ export async function convertToUSD(
   const cacheKey = fromCurrency.toUpperCase()
   const existing = cache[cacheKey]
 
-  // 2. Cache hit: entry exists and is less than 24 hours old
-  if (existing && now - new Date(existing.fetchedAt).getTime() < CACHE_TTL_MS) {
+  // 2. Cache hit: a live quote less than 24 hours old. A bundled fallback is never treated as fresh.
+  if (
+    existing &&
+    existing.source !== 'fallback' &&
+    now - new Date(existing.fetchedAt).getTime() < CACHE_TTL_MS
+  ) {
     return {
       result: {
         usdAmount: roundTo6(amount * existing.rate),
         rate: existing.rate,
         isStale: false,
         failed: false,
+        source: 'cache',
+        quotedAt: existing.fetchedAt,
       },
       updatedCache: cache,
     }
@@ -106,12 +125,14 @@ export async function convertToUSD(
     const freshRate = await fetchFxRate(fromCurrency, 'USD', timeoutMs)
     const roundedRate = roundTo6(freshRate)
 
+    const fetchedAt = new Date().toISOString()
     const newEntry: FxRateCacheEntry = {
       fromCurrency: cacheKey,
       toCurrency: 'USD',
       rate: roundedRate,
-      fetchedAt: new Date().toISOString(),
+      fetchedAt,
       isStale: false,
+      source: 'live',
     }
 
     return {
@@ -120,31 +141,70 @@ export async function convertToUSD(
         rate: roundedRate,
         isStale: false,
         failed: false,
+        source: 'live',
+        quotedAt: fetchedAt,
       },
       updatedCache: { ...cache, [cacheKey]: newEntry },
     }
   } catch {
-    // Fetch failed (timeout, network error, bad shape, unknown currency)
-    // Fall back to stale cache entry if available
-    if (existing) {
-      const staleEntry: FxRateCacheEntry = { ...existing, isStale: true }
+    // Fetch failed (timeout, network error, bad shape, unknown currency).
+    // A previously fetched rate is still better than the bundled snapshot.
+    if (existing && existing.source !== 'fallback') {
+      const staleEntry: FxRateCacheEntry = { ...existing, isStale: true, source: 'cache' }
       return {
         result: {
           usdAmount: roundTo6(amount * existing.rate),
           rate: existing.rate,
           isStale: true,
           failed: false,
+          source: 'cache',
+          quotedAt: existing.fetchedAt,
         },
         updatedCache: { ...cache, [cacheKey]: staleEntry },
       }
     }
 
-    // No cache at all — conversion failed entirely
+    const bundled = lookupFallbackRate(cacheKey)
+    if (bundled != null) {
+      const roundedRate = roundTo6(bundled)
+      // Do not cache this as a fresh live quote. The next purchase should try Frankfurter again.
+      return {
+        result: {
+          usdAmount: roundTo6(amount * roundedRate),
+          rate: roundedRate,
+          isStale: false,
+          failed: false,
+          source: 'fallback',
+          quotedAt: `${FX_FALLBACK_AS_OF}T00:00:00.000Z`,
+        },
+        updatedCache: cache,
+      }
+    }
+
+    // Unsupported currency and nothing cached.
     return {
-      result: { usdAmount: 0, rate: 0, isStale: false, failed: true },
+      result: {
+        usdAmount: 0,
+        rate: 0,
+        isStale: false,
+        failed: true,
+        source: 'live',
+        quotedAt: null,
+      },
       updatedCache: cache,
     }
   }
+}
+
+/** Short label for the receipt and the dispute summary. */
+export function describeRateSource(entry: Pick<FxRateCacheEntry, 'source' | 'isStale' | 'fetchedAt'>): string {
+  if (entry.source === 'fallback') {
+    const day = entry.fetchedAt.slice(0, 10)
+    return `Fallback rate as of ${day}`
+  }
+  if (entry.isStale) return 'Cached rate, may be stale'
+  if (entry.source === 'cache') return 'Cached live rate'
+  return 'Live rate from Frankfurter'
 }
 
 // ────────────────────────────────────────────────────────────

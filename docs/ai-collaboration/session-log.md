@@ -720,3 +720,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `README.md`, `.npmrc`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** None of the product behavior changed in this step. The peer-deps flag is an install workaround, not a change to the app.
+
+---
+
+## FX fallback — Hotel Lisbon timed out in manual testing
+
+**Timestamp:** 2026-10-30T18:39:41Z
+
+**My prompt:** Hotel Lisbon (480 EUR) sat on "Checking…" for about 10 seconds, then came back needs_approval with "currency conversion could not be completed" and "USD equivalent: Unavailable". The live FX lookup failed. The demo should not depend on the network.
+
+**What the AI did:** The Frankfurter call now gives up after 2.5 seconds. If it fails and there is no cached live rate, EUR, GBP, JPY, CAD, AUD, CHF, SEK, and NZD use a bundled table dated 2026-10-30. The receipt and the dispute summary say "Fallback rate as of 2026-10-30". A live quote is still used when it arrives, and a cached live rate is still preferred over the table. The fallback is not written into the 24-hour cache, so the next purchase tries Frankfurter again. An unsupported code such as XYZ, with no cache, still fails and goes to the inbox. With only a $2,000 Travel limit, 480 EUR converts and is auto-approved, and the date mismatch (and Dispute) remain.
+
+**Files touched:** `src/lib/fx-fallback.ts`, `src/lib/fx-service.ts`, `src/types/index.ts`, `src/store/useSpendGuardStore.ts`, `src/components/IntentReceiptDetail.tsx`, `src/components/PurchaseCard.tsx`, `src/components/SimulatorForm.tsx`, `src/lib/dispute-generator.ts`, `src/lib/__tests__/fx-service.test.ts`, `README.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** A stale cached live rate still wins over the bundled table, because that was an actual quote. The sample rules also include a $50 approval threshold. About $536 is under the $2,000 Travel limit, but it is over $50, so Hotel Lisbon still waits for approval when those sample rules are loaded. The reason is the threshold, not a missing rate. 74 unit tests pass, and the production build is clean.

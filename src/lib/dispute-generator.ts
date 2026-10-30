@@ -1,3 +1,4 @@
+import { describeRateSource } from '@/lib/fx-service'
 import type { IntentReceipt } from '@/types'
 
 /** Dispute is offered only when the receipt has at least one mismatch flag. */
@@ -76,11 +77,10 @@ export function generateDisputeSummary(
   }
 
   if (receipt.fxRate) {
-    const staleNote = receipt.fxRate.isStale ? ', rate may be stale' : ''
     lines.push(
       '',
       '--- EXCHANGE RATE ---',
-      `${receipt.fxRate.fromCurrency}/USD rate: ${receipt.fxRate.rate} (fetched ${receipt.fxRate.fetchedAt}${staleNote})`,
+      `${receipt.fxRate.fromCurrency}/USD rate: ${receipt.fxRate.rate} (${describeRateSource(receipt.fxRate)})`,
     )
   }
 

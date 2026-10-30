@@ -3,6 +3,8 @@
 import { useState, type FormEvent } from 'react'
 import Link from 'next/link'
 import { StatusBadge } from '@/components/StatusBadge'
+import { describeRateSource } from '@/lib/fx-service'
+import { formatUSD } from '@/lib/format'
 import { clonePresetRequest, findPreset, SIMULATOR_PRESETS } from '@/lib/simulator-presets'
 import { useSpendGuardStore } from '@/store/useSpendGuardStore'
 import type { IntentReceipt, PurchaseRequest, StructuredIntent } from '@/types'
@@ -169,6 +171,12 @@ export function SimulatorForm() {
           <p className="mt-2 text-stone-700">
             {result.decision.explanation || 'Every rule passed.'}
           </p>
+          {result.fxRate && result.usdEquivalentAmount != null ? (
+            <p className="mt-2 text-stone-700" data-testid="fx-source">
+              {formatUSD(result.usdEquivalentAmount)} · 1 {result.fxRate.fromCurrency} ={' '}
+              {result.fxRate.rate.toFixed(6)} USD · {describeRateSource(result.fxRate)}
+            </p>
+          ) : null}
           {result.mismatches.length > 0 ? (
             <ul className="mt-2 list-disc pl-5 text-orange-800">
               {result.mismatches.map((flag) => (
