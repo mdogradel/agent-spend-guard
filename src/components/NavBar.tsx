@@ -5,11 +5,11 @@ import { usePathname } from 'next/navigation'
 import { useSpendGuardStore } from '@/store/useSpendGuardStore'
 
 const LINKS = [
-  { href: '/dashboard', label: 'Dashboard' },
-  { href: '/inbox', label: 'Inbox' },
-  { href: '/rules', label: 'Rules' },
-  { href: '/simulator', label: 'Simulator' },
-  { href: '/receipts', label: 'Receipts' },
+  { href: '/dashboard', label: 'Dashboard', subtitle: 'Every agent that spends your money' },
+  { href: '/inbox', label: 'Inbox', subtitle: 'Purchases waiting for your approval' },
+  { href: '/rules', label: 'Rules', subtitle: 'Your rules and limits' },
+  { href: '/simulator', label: 'Simulator', subtitle: 'Simulate an agent purchase' },
+  { href: '/receipts', label: 'Receipts', subtitle: 'What each agent bought, and when' },
 ]
 
 function isActive(pathname: string, href: string): boolean {
@@ -47,6 +47,7 @@ export function NavBar() {
               <Link
                 key={link.href}
                 href={link.href}
+                title={link.subtitle}
                 data-testid={link.href === '/inbox' ? 'nav-inbox' : undefined}
                 className={`rounded-full px-3 py-1.5 ${
                   active ? 'bg-teal-800 text-white' : 'text-stone-700 hover:bg-stone-100'

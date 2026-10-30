@@ -2,9 +2,9 @@
 
 ## What I built and why
 
-Busy people are starting to let AI agents buy things on their card. The agent can book a hotel or grab coffee, but the person still needs a way to say what is allowed, stop a bad charge, and show a bank what they actually asked for.
+Busy people are starting to let AI agents buy things on their card. Those agents do not share one inbox, so a hotel booking and a coffee run are easy to lose track of, and hard to explain to a bank.
 
-Agent Spend Guard is that control, as a browser app. You set spending rules. A mock agent submits a purchase. A rules engine approves it, sends it to an inbox, or declines it. Every purchase keeps an intent receipt. If the purchase does not match the intent, you can copy a plain text dispute summary.
+Agent Spend Guard is one place that connects those agents. They follow your spending rules and your stated intent. Anything over a limit waits for your OK. Every purchase shows which agent bought what, and when. If the purchase does not match the intent, you can copy a plain text dispute summary.
 
 Nothing here moves money. There is no login, no bank connection, and no real card. Rules, receipts, and rates stay in this browser.
 

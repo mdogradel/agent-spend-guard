@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Agent Spend Guard",
-  description: "Review and limit purchases made by AI agents. Mock mode only.",
+  description: "Every AI agent that spends your money, in one place. Mock mode only.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

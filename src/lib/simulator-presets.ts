@@ -22,7 +22,7 @@ export const SIMULATOR_PRESETS: SimulatorPreset[] = [
     label: 'Coffee Shop',
     description: 'Small dining charge in USD',
     request: base('preset-coffee-shop', {
-      agentName: 'Daily Assistant',
+      agentName: 'Dining Assistant',
       merchantName: 'Blue Bottle Coffee',
       category: 'Dining',
       amount: 8.5,
@@ -61,7 +61,7 @@ export const SIMULATOR_PRESETS: SimulatorPreset[] = [
     label: 'Grocery Run',
     description: 'Everyday grocery charge in USD',
     request: base('preset-grocery-run', {
-      agentName: 'Household Agent',
+      agentName: 'Shopping Agent',
       merchantName: 'Corner Market',
       category: 'Groceries',
       amount: 95,

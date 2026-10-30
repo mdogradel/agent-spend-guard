@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { StatusBadge } from '@/components/StatusBadge'
 import { describeRateSource } from '@/lib/fx-service'
 import { formatUSD } from '@/lib/format'
+import { agentLabel } from '@/lib/agents'
 import { clonePresetRequest, findPreset, SIMULATOR_PRESETS } from '@/lib/simulator-presets'
 import { useSpendGuardStore } from '@/store/useSpendGuardStore'
 import type { IntentReceipt, PurchaseRequest, StructuredIntent } from '@/types'
@@ -83,7 +84,7 @@ export function SimulatorForm() {
     const booked = splitDates(purchaseDates)
     const request: PurchaseRequest = {
       id: crypto.randomUUID(),
-      agentName: agentName.trim() || 'Agent',
+      agentName: agentLabel(agentName),
       merchantName: merchantName.trim() || 'Merchant',
       category: category.trim() || 'General',
       amount: numeric,

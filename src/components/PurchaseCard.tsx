@@ -1,7 +1,8 @@
 'use client'
 
+import { agentLabel } from '@/lib/agents'
 import { describeRateSource } from '@/lib/fx-service'
-import { formatMoney, formatUSD } from '@/lib/format'
+import { formatMoney, formatUSD, formatWhen } from '@/lib/format'
 import type { IntentReceipt } from '@/types'
 
 interface PurchaseCardProps {
@@ -19,9 +20,11 @@ export function PurchaseCard({ receipt, onApprove, onDecline }: PurchaseCardProp
     <article data-testid="purchase-card" className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="text-xs uppercase tracking-wide text-stone-500">{purchase.agentName}</p>
+          <p className="text-xs font-medium uppercase tracking-wide text-teal-800">{agentLabel(purchase.agentName)}</p>
           <h2 className="text-lg font-semibold text-stone-900">{purchase.merchantName}</h2>
-          <p className="text-sm text-stone-600">{purchase.category}</p>
+          <p className="text-sm text-stone-600">
+            {purchase.category} · {formatWhen(purchase.submittedAt)}
+          </p>
         </div>
         <div className="text-right">
           <p className="text-lg font-semibold tabular-nums text-stone-900">

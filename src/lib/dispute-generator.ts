@@ -1,3 +1,4 @@
+import { agentLabel } from '@/lib/agents'
 import { describeRateSource } from '@/lib/fx-service'
 import type { IntentReceipt } from '@/types'
 
@@ -46,7 +47,7 @@ export function generateDisputeSummary(
   lines.push(
     '',
     '--- ACTUAL PURCHASE ---',
-    `Agent: ${purchase.agentName}`,
+    `Agent: ${agentLabel(purchase.agentName)}`,
     `Merchant: ${purchase.merchantName}`,
     `Category: ${purchase.category}`,
     `Amount: ${purchase.amount} ${currency}${usdNote}`,

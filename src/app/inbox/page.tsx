@@ -4,7 +4,8 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { OverageWarningModal } from '@/components/OverageWarningModal'
 import { PurchaseCard } from '@/components/PurchaseCard'
-import { formatUSD } from '@/lib/format'
+import { agentLabel } from '@/lib/agents'
+import { formatUSD, formatWhen } from '@/lib/format'
 import { useSpendGuardStore } from '@/store/useSpendGuardStore'
 
 export default function InboxPage() {
@@ -20,11 +21,8 @@ export default function InboxPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-semibold text-stone-900">Approvals inbox</h1>
-        <p className="mt-1 text-sm text-stone-600">
-          Approve checks the limit again without counting this purchase twice. If it no longer fits,
-          you can decline or override once.
-        </p>
+        <h1 className="text-2xl font-semibold text-stone-900">Inbox</h1>
+        <p className="mt-1 text-sm text-stone-600">Purchases waiting for your approval</p>
       </header>
 
       {pending.length === 0 ? (
@@ -55,7 +53,10 @@ export default function InboxPage() {
               <li key={receipt.id} className="flex items-center justify-between gap-3 px-4 py-3 text-sm">
                 <div>
                   <p className="font-medium text-stone-900">{receipt.purchaseRequest.merchantName}</p>
-                  <p className="text-stone-500">{receipt.purchaseRequest.category}</p>
+                  <p className="text-stone-500">
+                    {agentLabel(receipt.purchaseRequest.agentName)} · {receipt.purchaseRequest.category} ·{' '}
+                    {formatWhen(receipt.purchaseRequest.submittedAt)}
+                  </p>
                 </div>
                 <div className="text-right">
                   <p className="tabular-nums text-stone-500">

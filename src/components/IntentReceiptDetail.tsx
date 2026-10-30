@@ -1,3 +1,4 @@
+import { agentLabel } from '@/lib/agents'
 import { describeRateSource } from '@/lib/fx-service'
 import { formatMoney, formatUSD, formatWhen } from '@/lib/format'
 import { StatusBadge } from '@/components/StatusBadge'
@@ -12,7 +13,7 @@ export function IntentReceiptDetail({ receipt }: { receipt: IntentReceipt }) {
     <article className="space-y-5 rounded-xl border border-stone-200 bg-white p-5">
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="text-xs uppercase tracking-wide text-stone-500">{purchase.agentName}</p>
+          <p className="text-xs font-medium uppercase tracking-wide text-teal-800">{agentLabel(purchase.agentName)}</p>
           <h1 className="text-2xl font-semibold text-stone-900">{purchase.merchantName}</h1>
           <p className="text-sm text-stone-600">{purchase.category}</p>
         </div>
