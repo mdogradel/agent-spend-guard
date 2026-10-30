@@ -305,7 +305,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Render `<DisputeSummaryPanel>` only when `receipt.mismatches.length > 0`
     - _Requirements: 7.2, 8.1, 8.2, 8.6_
 
-- [ ] 13. Checkpoint — full feature wired end-to-end
+- [x] 13. Checkpoint — full feature wired end-to-end
   - Ensure all unit and property-based tests still pass (`npx vitest --run`). Manually verify the four simulator presets produce expected decisions and the Hotel Lisbon preset triggers a date mismatch flag. Ask the user if any clarifications are needed before writing integration tests.
 
 - [ ]* 14. Write Playwright integration tests

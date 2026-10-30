@@ -664,3 +664,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/app/receipts/[id]/page.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** None. 69 tests pass, build is clean. The dynamic route prerenders as a partial page, which is what Next.js 16 does for a client page that reads the id.
+
+---
+
+## Task 13 — Checkpoint, features wired end to end
+
+**Timestamp:** 2026-10-30T18:25:21Z
+
+**My prompt:** Stop at the task 13 checkpoint, confirm the presets, record the results, and keep going.
+
+**What the AI did:** Re-ran `npm test` (69 passing) and `npm run build` (dashboard, inbox, rules, simulator, receipts, and the receipt detail route all generated). A one-off preset check, not kept in the suite, confirmed Coffee Shop auto-approves under the sample limits, Grocery Run needs approval because $95 is over the $50 threshold, Hotel Lisbon flags only the date mismatch (2026-11-15 vs 2026-11-14) and does not flag the 480 EUR price against a 500 EUR budget, and Flight Tokyo dates in March 2027 match.
+
+**Files touched:** `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** No open questions. Foreign presets go to needs_approval in that check only because I did not supply an FX rate. The real simulator fetches a rate. Continuing to the Playwright tests.
