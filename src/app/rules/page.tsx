@@ -89,9 +89,7 @@ export default function RulesPage() {
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold text-stone-900">Rules</h1>
-          <p className="mt-1 text-sm text-stone-600">
-            Category limits, merchant limits, one approval threshold, and blocked categories.
-          </p>
+          <p className="mt-1 text-sm text-stone-600">Your rules and limits</p>
         </div>
         <div className="flex gap-2">
           <button

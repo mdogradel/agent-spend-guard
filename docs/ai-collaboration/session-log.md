@@ -748,3 +748,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/app/dashboard/page.tsx`, `src/app/receipts/[id]/page.tsx`, `tests/page-smoke.spec.ts`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** I did not wrap `pendingCount()` in useMemo. It returns a number, and Object.is treats the same number as unchanged. The smoke test was run against `npm run build && npm start`, not the dev server. It passed. `npm test` is still 74 passing, and the production build is clean.
+
+---
+
+## Product story on the first screen
+
+**Timestamp:** 2026-10-30T19:01:37Z
+
+**My prompt:** The product goal is not obvious. Make it clear everywhere a first visit lands that this is one place for every AI agent that spends your money: they follow your rules and intent, overages wait for approval, and each purchase shows which agent bought what, and when.
+
+**What the AI did:** The dashboard (where `/` lands) now opens with that headline, a one line subhead, three value tiles, and a "Try it in 30 seconds" path to sample rules and the simulator. Page subtitles match the nav titles: Rules, Simulator, Inbox, and Receipts. Recent purchases, the inbox, the receipts list, and the receipt detail show the agent name and the date and time. The orange dot is labeled "Intent mismatch". The dashboard has a By agent summary (name, count, USD total, last purchase). Presets use Dining Assistant, Travel Agent, and Shopping Agent.
+
+**Files touched:** `src/app/dashboard/page.tsx`, `src/app/rules/page.tsx`, `src/app/simulator/page.tsx`, `src/app/inbox/page.tsx`, `src/app/receipts/page.tsx`, `src/app/layout.tsx`, `src/components/NavBar.tsx`, `src/components/ActivityFeedItem.tsx`, `src/components/PurchaseCard.tsx`, `src/components/IntentReceiptDetail.tsx`, `src/components/SimulatorForm.tsx`, `src/lib/agents.ts`, `src/lib/simulator-presets.ts`, `src/lib/dispute-generator.ts`, `src/lib/__tests__/agents.test.ts`, `README.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** Purchases already store `agentName`, so I did not add a second `agent` field. A blank or missing name displays as "Unknown agent" without rewriting old localStorage rows. A new blank simulator submit is stored as "Unknown agent" instead of "Agent". `npm test` is 78 passing, the production build is clean, and the fresh context Playwright smoke test passed.
