@@ -309,7 +309,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
   - Ensure all unit and property-based tests still pass (`npx vitest --run`). Manually verify the four simulator presets produce expected decisions and the Hotel Lisbon preset triggers a date mismatch flag. Ask the user if any clarifications are needed before writing integration tests.
 
 - [ ]* 14. Write Playwright integration tests
-  - [ ]* 14.2 Approvals Inbox approve-with-overage flow
+  - [x]* 14.2 Approvals Inbox approve-with-overage flow
     - Test: configure a Category_Limit below the pending purchase amount; navigate to Inbox; click Approve → `OverageWarningModal` appears with correct overage text; click Override Once → receipt moves out of Inbox, override log present on receipt detail
     - _Requirements: 5.2, 5.3, 5.5_
 

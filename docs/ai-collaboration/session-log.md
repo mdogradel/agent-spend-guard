@@ -678,3 +678,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** No open questions. Foreign presets go to needs_approval in that check only because I did not supply an FX rate. The real simulator fetches a rate. Continuing to the Playwright tests.
+
+---
+
+## Task 14.2 — Approval override Playwright test
+
+**Timestamp:** 2026-10-30T18:28:40Z
+
+**My prompt:** Write the Playwright test for approving a purchase that is over the limit, then overriding once.
+
+**What the AI did:** Added `tests/approval-override.spec.ts`. It sets a $5 Dining limit, submits the Coffee Shop preset ($8.50), approves it, checks the modal text "Approving this puts Dining $3.50 over the $5.00 monthly limit", overrides once, and checks the override on the receipt. Vitest now ignores `tests/` so it does not try to run Playwright. The dev instant-navigation checker was warning on every client page, so validation is manual unless a route opts in.
+
+**Files touched:** `tests/approval-override.spec.ts`, `vitest.config.mts`, `next.config.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** The $3.50 figure is the overage with this receipt excluded. Counting it twice would have said $12.00. The test passed. Unit tests still 69, build is clean.
