@@ -328,3 +328,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/lib/__tests__/mismatch-checker.property.test.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** None. 62 tests pass, build is clean.
+
+---
+
+## Task 7.1 — Dispute summary generator
+
+**Timestamp:** 2026-10-30T18:11:50Z
+
+**My prompt:** Implement task 7.1. Plain-text dispute summary with the sections from the design.
+
+**What the AI did:** Added `src/lib/dispute-generator.ts`. The summary has the original intent, the actual purchase, each mismatch, the rules decision, and the UTC timestamp. Override and FX sections are included only when the receipt has them. Also exported `shouldShowDisputeButton`, which is true only when there is at least one mismatch.
+
+**Files touched:** `src/lib/dispute-generator.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** The button helper is a one-liner, but the page and property 12 should share it instead of each checking `mismatches.length` on their own. Build is clean. Property coverage is task 7.2.
