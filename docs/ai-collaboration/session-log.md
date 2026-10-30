@@ -566,3 +566,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/components/AppShell.tsx`, `src/app/layout.tsx`, `src/app/globals.css`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** The task says to put `"use client"` on the root layout. Next.js 16 uses that file for `metadata` and `next/font`, which have to stay on the server. The client behavior lives in `AppShell` instead. I also locked the page to a light background so the screens do not flip with the OS theme. 69 tests pass, build is clean.
+
+---
+
+## Task 12.2 — Root redirect
+
+**Timestamp:** 2026-10-30T18:22:22Z
+
+**My prompt:** Send `/` to `/dashboard`.
+
+**What the AI did:** Replaced the starter `src/app/page.tsx` with a redirect to `/dashboard`.
+
+**Files touched:** `src/app/page.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** None. 69 tests pass, build is clean. `/dashboard` does not exist yet, so the redirect target is task 12.5.

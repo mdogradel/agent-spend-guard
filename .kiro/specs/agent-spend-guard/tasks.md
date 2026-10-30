@@ -264,7 +264,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - `"use client"` on the layout (all pages are client components)
     - _Requirements: 6.1, 6.2, 6.3, 6.5, 10.5_
 
-  - [ ] 12.2 Create `src/app/page.tsx` (root redirect to `/dashboard`)
+  - [x] 12.2 Create `src/app/page.tsx` (root redirect to `/dashboard`)
     - _Requirements: 9.1_
 
   - [ ] 12.3 Create `src/app/rules/page.tsx` — Rules Configuration page
