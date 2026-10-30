@@ -1,16 +1,24 @@
 'use client'
 
+import { useMemo } from 'react'
 import Link from 'next/link'
 import { ActivityFeedItem } from '@/components/ActivityFeedItem'
 import { SpendProgressBar } from '@/components/SpendProgressBar'
 import { formatUSD } from '@/lib/format'
+import { getMonthKey } from '@/lib/monthly-reset'
 import { spendFor } from '@/lib/rules-engine'
-import { useSpendGuardStore } from '@/store/useSpendGuardStore'
+import { computeCommittedSpend, useSpendGuardStore } from '@/store/useSpendGuardStore'
 
 export default function DashboardPage() {
   const rules = useSpendGuardStore((state) => state.rules)
   const receipts = useSpendGuardStore((state) => state.receipts)
-  const committed = useSpendGuardStore((state) => state.committedSpend())
+  // committedSpend() builds a new object on every call. Selecting it with
+  // Zustand makes useSyncExternalStore think the snapshot changed forever.
+  const month = getMonthKey(new Date())
+  const committed = useMemo(
+    () => computeCommittedSpend(receipts, month),
+    [receipts, month],
+  )
 
   const categorySpend = rules.categoryLimits.reduce(
     (sum, limit) => sum + spendFor(committed.byCategory, limit.category),
