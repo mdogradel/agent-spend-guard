@@ -63,7 +63,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5_
 
 - [ ] 5. Implement the rules engine
-  - [ ] 5.1 Create `src/lib/rules-engine.ts` with `evaluateRules` pure function
+  - [x] 5.1 Create `src/lib/rules-engine.ts` with `evaluateRules` pure function
     - Implement the seven-step evaluation order with correct short-circuit behaviour (steps 1–3) and collect-all-failures model (steps 4–7)
     - Step 1: invalid amount (≤ 0) → `declined`, short-circuit
     - Step 2: FX failed → `needs_approval`, short-circuit

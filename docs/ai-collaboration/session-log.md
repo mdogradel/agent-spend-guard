@@ -244,3 +244,17 @@ Four targeted fixes applied after the initial design draft.
 **Verification:** 25/25 tests pass (12 persistence + 13 FX service), build clean.
 
 **Anything changed or rejected:** None.
+
+---
+
+## Task 5.1 — Implement the rules engine
+
+**Timestamp:** 2026-10-30T18:07:40Z
+
+**My prompt:** Implement task 5.1. Keep `evaluateRules` a pure function with the seven-step order from the design.
+
+**What the AI did:** Added `src/lib/rules-engine.ts`. Steps 1-3 (invalid amount, FX failure, blocked category) short-circuit. Steps 4-7 (threshold, no intent, category limit, merchant limit) collect every failure and join the explanations with " and ". The threshold uses strictly-greater-than. A limit is exceeded only when committed plus proposed is over the limit in cents, so exact headroom stays within limit. Category and merchant names match case-insensitively.
+
+**Files touched:** `src/lib/rules-engine.ts`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** Money comparisons use integer cents so floating point does not flip a one-cent overage. `evaluatedAt` is an optional argument so tests can pin the timestamp; the default is the current UTC time. No behavior was dropped from the spec.
