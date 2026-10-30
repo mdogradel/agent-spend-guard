@@ -510,3 +510,17 @@ Four targeted fixes applied after the initial design draft.
 **Files touched:** `src/components/RuleForm.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
 
 **Decisions/pushback:** The pending-purchase warning lives on the form so both create-page and inline edit use the same gate. The task text also mentions it on the rules page. The page will render this form, so the warning is not implemented twice. 69 tests pass, build is clean.
+
+---
+
+## Task 11.8 — Simulator form
+
+**Timestamp:** 2026-10-30T18:20:07Z
+
+**My prompt:** Add the agent simulator form with presets, editable structured intent, and a decision after submit.
+
+**What the AI did:** Added `src/components/SimulatorForm.tsx`. Choosing a preset fills every field, including the four structured intent fields. Amounts of zero or less are rejected before the store is called. Submit runs `submitPurchase` and shows the outcome, explanation, mismatch lines, and a link to the receipt.
+
+**Files touched:** `src/components/SimulatorForm.tsx`, `.kiro/specs/agent-spend-guard/tasks.md`, `docs/ai-collaboration/session-log.md`
+
+**Decisions/pushback:** Purchase travel dates are editable too. The task list names the structured dates, but the Hotel Lisbon mismatch is on the purchase dates, and hiding them would make the off-by-one impossible to see or correct. 69 tests pass, build is clean.

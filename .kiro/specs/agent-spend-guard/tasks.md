@@ -237,7 +237,7 @@ Implement Agent Spend Guard as a Next.js 15 App Router application with client-s
     - Calls `addRule` or `updateRule` on submit
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.6, 1.8_
 
-  - [ ] 11.8 Create `src/components/SimulatorForm.tsx`
+  - [x] 11.8 Create `src/components/SimulatorForm.tsx`
     - Preset selector dropdown populates all fields on change
     - Editable fields for agent name, merchant name, category, amount, currency, intentText, and all four StructuredIntent fields
     - Client-side validation: amount > 0
